@@ -1,7 +1,7 @@
 # Scheduling_Simulator
 
 **Simulateur d'ordonnancement de processus en C**  
-*Projet L3 Informatique - Groupe TD C*
+*Projet L3 Informatique - Groupe C6*
 
 ---
 
@@ -28,14 +28,6 @@
 
 ---
 
-## Dépendances critiques
-1. **Architecture commune → Tous les modules**  
-2. **FIFO → Tests unitaires**  
-3. **SJF/SJRF/RR → Tests croisés**  
-4. **Tous tests → Intégration**  
-5. **Intégration → Packaging final**
-
----
 
 ## Dates clés
 | Date | Événement | Détail |
@@ -103,8 +95,7 @@ Archive finale : `L3_I-OS-Projet-NOM1-NOM2-NOM3.tgz` comprenant :
 
 ---
 
-## Échéances importantes
-- Formation des groupes : mail à jean-luc.bourdon@cyu.fr avant le 23/01/2026  
+## Échéances importantes 
 - Dépôt final : archive Moodle avant le 03/04/2026  
   - Pénalité : 1 point/jour (max 5 points)  
 - Soutenance : 7, 8 ou 9 avril 2026  
