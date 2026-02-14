@@ -28,6 +28,20 @@ int main(int argc, char *argv[]) {
         printf("\n");
     }
     
+    // Choisir l'algorithme (par défaut FIFO)
+    char *algo = "fifo";
+    if (argc >= 3) {
+        algo = argv[2];
+    }
+    
+    ScheduleResult result;
+    
+    if (strcmp(algo, "fifo") == 0) {
+        fifo_schedule(processes, process_count, &result);
+    } else {
+        fprintf(stderr, "Algorithme non implémenté: %s\n", algo);
+    }
+    
     free_processes(processes, process_count);
     return 0;
 }

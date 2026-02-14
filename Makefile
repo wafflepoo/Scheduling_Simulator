@@ -1,4 +1,3 @@
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Iinclude -g
 TARGET = simulateur
@@ -24,7 +23,7 @@ doc:
 	doxygen Doxyfile
 
 install: $(TARGET)
-	cp $(TARGET) /usr/local/bin/   # ou autre chemin
+	cp $(TARGET) /usr/local/bin/
 
 clean:
 	rm -rf $(OBJDIR) $(TARGET) doc/html doc/latex
