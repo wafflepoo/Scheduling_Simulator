@@ -1,0 +1,102 @@
+# Fichiers objets compilés
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.exe
+*.out
+*.app
+
+# Exécutable final (nommé simulateur, mais on peut ignorer tous les exécutables)
+/simulateur
+/simulateur.exe
+
+# Dossier de compilation (obj/) si vous l'utilisez
+/obj/
+/build/
+
+# Doxygen génère la documentation dans doc/html et doc/latex
+/doc/html/
+/doc/latex/
+
+# Fichiers de backup créés par certains éditeurs
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Répertoire .vs/ (Visual Studio)
+.vs/
+
+# Répertoire .vscode/ (mais vous pouvez le versionner si vous voulez partager config)
+.vscode/
+# Si vous voulez garder les paramètres d'espace de travail, commentez la ligne ci-dessus
+
+# Fichiers de configuration spécifiques à l'IDE (CodeBlocks, etc.)
+*.cbp
+*.depend
+*.layout
+*.workspace
+
+# Fichiers de projet Qt (si utilisés)
+*.pro
+*.pro.user
+*.pri
+
+# Fichiers de session gdb
+.gdb_history
+*.gdb
+
+# Fichiers de tags (ctags)
+tags
+TAGS
+
+# Fichiers de logs et rapports de couverture
+*.log
+*.gcov
+*.gcda
+*.gcno
+
+# Dossiers d'archive (ne pas versionner les archives)
+*.tgz
+*.tar.gz
+*.zip
+*.7z
+
+# Fichiers de test générés (par exemple CSV produits par le programme)
+*.csv
+# Mais si vous voulez garder des exemples de CSV, mieux vaut les mettre dans un dossier spécifique et l'inclure.
+# Ici on ignore tous les CSV sauf s'ils sont dans un dossier tests/data/ par exemple.
+# On peut ajuster : 
+# tests/*.csv  (si on veut ignorer les CSV de tests)
+
+# Fichiers de données d'entrée (vous voulez peut-être versionner vos fichiers d'exemple)
+# Ne pas ignorer les fichiers .txt d'exemple si vous les mettez dans examples/ ou tests/
+# On garde donc *.txt sauf si ce sont des résultats.
+
+# Dossiers de sortie CSV créés par le programme
+/output/
+/results/
+
+# Fichiers de configuration Doxygen (on garde Doxyfile car il est important)
+# Ne pas ignorer Doxyfile
+
+
+# Fichiers spécifiques à Windows (Thumbs.db, desktop.ini)
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Répertoire .idea/ (JetBrains)
+.idea/
+
+# Répertoire .settings/ (Eclipse)
+.settings/
+.classpath
+.project
+
+# Fichiers de couverture (lcov)
+coverage/
+*.info
