@@ -5,8 +5,11 @@ SRCDIR = src
 INCDIR = include
 OBJDIR = obj
 
+.SUFFIXES:
+
 SRCS = $(wildcard $(SRCDIR)/*.c)
 OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+
 
 all: $(TARGET)
 

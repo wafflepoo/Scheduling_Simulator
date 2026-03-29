@@ -38,7 +38,14 @@ int main(int argc, char *argv[]) {
     
     if (strcmp(algo, "fifo") == 0) {
         fifo_schedule(processes, process_count, &result);
-    } else {
+    }
+    else if(strcmp(algo, "sjf") == 0){
+        sjf_schedule(processes, process_count, &result);
+    }
+    else if(strcmp(algo, "srjf") == 0){
+        sjrf_schedule(processes, process_count, &result);
+    }
+    else {
         fprintf(stderr, "Algorithme non implémenté: %s\n", algo);
     }
     
