@@ -1,31 +1,29 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude -g
-TARGET = simulateur
+CFLAGS = -Wall -Wextra -g -Iinclude
 SRCDIR = src
-INCDIR = include
 OBJDIR = obj
+SOURCES = $(wildcard $(SRCDIR)/*.c)
+OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+EXEC = scheduler
 
-SRCS = $(wildcard $(SRCDIR)/*.c)
-OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+all: $(EXEC)
 
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
+$(EXEC): $(OBJECTS)
 	$(CC) $^ -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+	if not exist $(OBJDIR) mkdir $(OBJDIR)
 
 doc:
 	doxygen Doxyfile
 
-install: $(TARGET)
-	cp $(TARGET) /usr/local/bin/
-
 clean:
-	rm -rf $(OBJDIR) $(TARGET) doc/html doc/latex
+	rm -rf $(OBJDIR) $(EXEC) doc/
 
-.PHONY: all doc install clean
+install: $(EXEC)
+	cp $(EXEC) /usr/local/bin/
+
+.PHONY: all doc clean install

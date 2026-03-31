@@ -2,25 +2,36 @@
 #define SCHEDULER_H
 
 #include <stdbool.h>
+#include <limits.h>
+
+// États possibles d’un processus
+typedef enum {
+    NEW,        // Pas encore arrivé
+    READY,      // En file d’attente CPU
+    RUNNING,    // En cours d’exécution
+    WAITING,    // En attente d’E/S
+    TERMINATED
+} ProcessState;
 
 // Structure pour un processus
 typedef struct {
     int pid;                    // Identifiant
-    int arrival_time;           // Date d'arrivée
+    int arrival_time;           // Date d’arrivée
     int *cpu_bursts;            // Tableau des cycles CPU
     int *io_bursts;             // Tableau des cycles E/S
     int num_bursts;             // Nombre total de bursts
     int current_burst_index;    // Pour suivre où il en est
     
     // Pour les statistiques
-    int start_time;             // Début de l'exécution (pour réponse)
+    int start_time;             // Début de l’exécution (pour réponse)
     int finish_time;            // Fin du processus
-    int total_wait_time;        // Temps d'attente cumulé
+    int total_wait_time;        // Temps d’attente cumulé (dans ready)
     int response_time;          // Premier démarrage - arrivée
     
-    // Pour l'ordonnancement
-    int remaining_time;         // Temps restant (pour SJRF)
+    // Pour l’ordonnancement
+    int remaining_burst;        // Temps restant du burst CPU en cours
     int last_exec_time;         // Dernier moment exécuté (pour RR)
+    ProcessState state;         // État actuel
 } Process;
 
 // Structure pour les résultats
@@ -34,7 +45,7 @@ typedef struct {
     int *response_times;        // Par processus
 } ScheduleResult;
 
-// Structure pour l'ordonnanceur (pattern strategy)
+// Structure pour l’ordonnanceur (pattern strategy)
 typedef struct {
     const char *name;
     void (*schedule)(Process *processes, int count, ScheduleResult *result);

@@ -34,7 +34,22 @@ static int cmp_arrival(const void *a, const void *b) {
     return p1->arrival_time - p2->arrival_time;
 }
 
-void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
+// Sélection du processus avec le plus court prochain burst CPU
+static int select_shortest_job(Process **ready_queue, int ready_count) {
+    if (ready_count == 0) return -1;
+    int idx = 0;
+    int shortest = ready_queue[0]->cpu_bursts[ready_queue[0]->current_burst_index];
+    for (int i = 1; i < ready_count; i++) {
+        int burst = ready_queue[i]->cpu_bursts[ready_queue[i]->current_burst_index];
+        if (burst < shortest) {
+            shortest = burst;
+            idx = i;
+        }
+    }
+    return idx;
+}
+
+void sjf_schedule(Process *processes, int count, ScheduleResult *result) {
     if (count == 0) return;
 
     Process *proc = malloc(count * sizeof(Process));
@@ -49,7 +64,7 @@ void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
         for (int j = 0; j < proc[i].num_bursts - 1; j++) total += proc[i].io_bursts[j];
         if (total > max_time) max_time = total;
     }
-    max_time += 10; // marge
+    max_time += 10;
 
     char **timeline = malloc(count * sizeof(char *));
     for (int i = 0; i < count; i++) {
@@ -69,7 +84,7 @@ void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
         for (int j = 0; j < proc[i].num_bursts; j++)
             total_cpu_time += proc[i].cpu_bursts[j];
 
-    printf("\n=== Simulation FIFO (non préemptif) ===\n");
+    printf("\n=== Simulation SJF (non préemptif) ===\n");
 
     while (next_arrival_idx < count || ready_count > 0 || io_head || running) {
         // 1. Prochain événement
@@ -85,7 +100,7 @@ void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
         }
         if (next_event == INT_MAX) break;
 
-        // 2. Remplir la timeline pour [current_time, next_event)
+        // 2. Remplir la timeline
         for (int t = current_time; t < next_event; t++) {
             if (running != NULL)
                 timeline[running->pid - 1][t] = 'U';
@@ -135,10 +150,12 @@ void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
             }
         }
 
-        // 7. Démarrer un nouveau processus (FIFO) si CPU libre
+        // 7. Démarrer un nouveau processus selon SJF
         if (running == NULL && ready_count > 0) {
-            running = ready_queue[0];
-            for (int i = 0; i < ready_count - 1; i++)
+            int idx = select_shortest_job(ready_queue, ready_count);
+            running = ready_queue[idx];
+            // Retirer de la file
+            for (int i = idx; i < ready_count - 1; i++)
                 ready_queue[i] = ready_queue[i + 1];
             ready_count--;
 
@@ -147,12 +164,12 @@ void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
 
             running->remaining_burst = running->cpu_bursts[running->current_burst_index];
             running->start_time = current_time;
-            printf("[T=%d] P%d commence burst de %d\n", current_time, running->pid,
+            printf("[T=%d] P%d commence burst de %d (SJF)\n", current_time, running->pid,
                    running->remaining_burst);
         }
     }
 
-    // --- Affichage de la chronologie ---
+    // Affichage chronologie
     printf("\nChronologie (U=CPU, O=E/S, W=Attente, .=inactif)\n");
     for (int i = 0; i < count; i++) {
         printf("P%d: ", proc[i].pid);
@@ -163,7 +180,7 @@ void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
         printf("\n");
     }
 
-    // --- Calcul des indicateurs ---
+    // Calcul des indicateurs
     int total_wait = 0, total_turnaround = 0, total_response = 0;
     for (int i = 0; i < count; i++) {
         Process *p = &proc[i];
@@ -178,7 +195,7 @@ void fifo_schedule(Process *processes, int count, ScheduleResult *result) {
     result->avg_response_time = (float)total_response / count;
     result->cpu_utilization = (float)total_cpu_time / current_time * 100;
 
-    printf("\n=== Résultats FIFO ===\n");
+    printf("\n=== Résultats SJF ===\n");
     printf("Temps d'attente moyen: %.2f\n", result->avg_wait_time);
     printf("Turnaround moyen: %.2f\n", result->avg_turnaround_time);
     printf("Temps de réponse moyen: %.2f\n", result->avg_response_time);
