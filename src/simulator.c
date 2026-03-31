@@ -31,19 +31,9 @@ static int cmp_arrival(const void *a, const void *b) {
     return ((Process*)a)->arrival_time - ((Process*)b)->arrival_time;
 }
 
-static int select_shortest_remaining(Process **ready, int n) {
-    int idx = 0;
-    int min = ready[0]->remaining_burst;
-    for (int i = 1; i < n; i++) {
-        if (ready[i]->remaining_burst < min) {
-            min = ready[i]->remaining_burst;
-            idx = i;
-        }
-    }
-    return idx;
-}
+void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult *result) {
+    if (count == 0) return;
 
-void sjrf_schedule(Process *processes, int count, ScheduleResult *result) {
     Process *proc = malloc(count * sizeof(Process));
     memcpy(proc, processes, count * sizeof(Process));
     qsort(proc, count, sizeof(Process), cmp_arrival);
@@ -57,7 +47,6 @@ void sjrf_schedule(Process *processes, int count, ScheduleResult *result) {
         proc[i].state = NEW;
     }
 
-    // Estimation de la durée maximale pour la timeline
     int max_time = 0;
     for (int i = 0; i < count; i++) {
         int total = proc[i].arrival_time;
@@ -74,64 +63,76 @@ void sjrf_schedule(Process *processes, int count, ScheduleResult *result) {
     }
 
     Process *ready[100];
-    int ready_cnt = 0;
+    int ready_head = 0, ready_tail = 0;
     IOEvent *io_head = NULL;
     int current_time = 0;
     int next_arrival = 0;
     Process *running = NULL;
+    int remaining_quantum = 0;
 
     int total_cpu = 0;
     for (int i = 0; i < count; i++)
         for (int j = 0; j < proc[i].num_bursts; j++)
             total_cpu += proc[i].cpu_bursts[j];
 
-    printf("\n=== SRJF (préemptif) ===\n");
+    printf("\n=== Simulation %s ===\n", policy->name);
+    if (policy->quantum > 0)
+        printf("Quantum = %d ms\n", policy->quantum);
 
-    while (next_arrival < count || ready_cnt > 0 || io_head || running) {
-        // 1. Déterminer le prochain événement
+    while (next_arrival < count || ready_tail != ready_head || io_head || running) {
         int next_event = INT_MAX;
-        if (next_arrival < count) next_event = proc[next_arrival].arrival_time;
-        if (io_head && io_head->finish_time < next_event) next_event = io_head->finish_time;
+        if (next_arrival < count)
+            next_event = proc[next_arrival].arrival_time;
+        if (io_head && io_head->finish_time < next_event)
+            next_event = io_head->finish_time;
+        if (running && remaining_quantum > 0) {
+            int fin_quantum = current_time + remaining_quantum;
+            if (fin_quantum < next_event)
+                next_event = fin_quantum;
+        }
         if (running && running->remaining_burst > 0) {
-            int burst_end = current_time + running->remaining_burst;
-            if (burst_end < next_event) next_event = burst_end;
+            int fin_burst = current_time + running->remaining_burst;
+            if (fin_burst < next_event)
+                next_event = fin_burst;
         }
         if (next_event == INT_MAX) break;
 
         int elapsed = next_event - current_time;
 
-        // 2. Remplir la timeline et ajouter les temps d'attente
-        for (int t = current_time; t < next_event; t++) {
-            if (running) timeline[running->pid-1][t] = 'U';
-            for (int i = 0; i < ready_cnt; i++) timeline[ready[i]->pid-1][t] = 'W';
-            for (IOEvent *e = io_head; e; e = e->next) timeline[e->process->pid-1][t] = 'O';
-        }
-        for (int i = 0; i < ready_cnt; i++) ready[i]->total_wait_time += elapsed;
+        for (int i = ready_head; i != ready_tail; i = (i+1)%100)
+            ready[i]->total_wait_time += elapsed;
 
-        // 3. Mettre à jour le temps restant du processus en cours
-        if (running) {
-            running->remaining_burst -= elapsed;
+        for (int t = current_time; t < next_event; t++) {
+            if (running)
+                timeline[running->pid-1][t] = 'U';
+            for (int i = ready_head; i != ready_tail; i = (i+1)%100)
+                timeline[ready[i]->pid-1][t] = 'W';
+            for (IOEvent *e = io_head; e; e = e->next)
+                timeline[e->process->pid-1][t] = 'O';
         }
 
         current_time = next_event;
+        if (running) {
+            running->remaining_burst -= elapsed;
+            remaining_quantum -= elapsed;
+        }
 
-        // 4. Traiter les arrivées
         while (next_arrival < count && proc[next_arrival].arrival_time <= current_time) {
-            ready[ready_cnt++] = &proc[next_arrival];
+            ready[ready_tail] = &proc[next_arrival];
+            ready_tail = (ready_tail+1)%100;
             next_arrival++;
         }
 
-        // 5. Traiter les fins d'E/S
         while (io_head && io_head->finish_time <= current_time) {
             Process *p = io_head->process;
             p->remaining_burst = p->cpu_bursts[p->current_burst_index];
-            ready[ready_cnt++] = p;
+            ready[ready_tail] = p;
+            ready_tail = (ready_tail+1)%100;
             IOEvent *tmp = io_head;
             io_head = io_head->next;
             free(tmp);
         }
 
-        // 6. Vérifier si le burst du processus en cours est terminé
         if (running && running->remaining_burst == 0) {
             running->current_burst_index++;
             if (running->current_burst_index == running->num_bursts) {
@@ -144,43 +145,38 @@ void sjrf_schedule(Process *processes, int count, ScheduleResult *result) {
                 printf("[T=%d] P%d -> E/S jusqu'à %d\n", current_time, running->pid, current_time+io_dur);
                 running = NULL;
             }
+        } else if (running && remaining_quantum == 0 && policy->quantum > 0) {
+            ready[ready_tail] = running;
+            ready_tail = (ready_tail+1)%100;
+            printf("[T=%d] P%d quantum écoulé (reste %d), remis en file\n", current_time, running->pid, running->remaining_burst);
+            running = NULL;
         }
 
-        // 7. Préemption : si un processus ready a un temps restant plus petit
-        if (running && ready_cnt > 0) {
-            int best_idx = select_shortest_remaining(ready, ready_cnt);
-            Process *best = ready[best_idx];
-            if (best->remaining_burst < running->remaining_burst) {
-                printf("[T=%d] Préemption : P%d (restant %d) -> P%d (restant %d)\n",
-                       current_time, running->pid, running->remaining_burst,
-                       best->pid, best->remaining_burst);
-                // Remettre running dans ready
-                ready[ready_cnt++] = running;
-                // Enlever best de ready
-                for (int i = best_idx; i < ready_cnt-1; i++) ready[i] = ready[i+1];
-                ready_cnt--;
-                // Nouveau running
-                running = best;
-                if (running->response_time == -1)
-                    running->response_time = current_time - running->arrival_time;
-                printf("[T=%d] P%d reprend (burst restant %d)\n", current_time, running->pid, running->remaining_burst);
-            }
-        }
+        if (running == NULL && ready_tail != ready_head) {
+            int idx = policy->select_next(ready, ready_tail - ready_head, policy->quantum, current_time);
+            int real_idx = (ready_head + idx) % 100;
+            running = ready[real_idx];
+            for (int i = real_idx; i != ready_tail-1; i = (i+1)%100)
+                ready[i] = ready[(i+1)%100];
+            ready_tail = (ready_tail - 1 + 100) % 100;
+            if (ready_tail < ready_head) ready_head = 0;
 
-        // 8. Démarrer un nouveau processus si CPU libre
-        if (running == NULL && ready_cnt > 0) {
-            int idx = select_shortest_remaining(ready, ready_cnt);
-            running = ready[idx];
-            for (int i = idx; i < ready_cnt-1; i++) ready[i] = ready[i+1];
-            ready_cnt--;
             if (running->response_time == -1)
                 running->response_time = current_time - running->arrival_time;
-            printf("[T=%d] P%d démarre (burst %d)\n", current_time, running->pid, running->remaining_burst);
+
+            if (policy->quantum > 0) {
+                remaining_quantum = (running->remaining_burst < policy->quantum) ? running->remaining_burst : policy->quantum;
+                printf("[T=%d] P%d démarre (burst restant %d, quantum %d)\n",
+                       current_time, running->pid, running->remaining_burst, remaining_quantum);
+            } else {
+                printf("[T=%d] P%d démarre (burst restant %d)\n",
+                       current_time, running->pid, running->remaining_burst);
+            }
         }
     }
 
-    // Affichage de la chronologie
-    printf("\nChronologie (U=CPU, O=E/S, W=Attente)\n");
+    // Chronologie (optionnelle, mais conservée)
+    printf("\nChronologie (U=CPU, O=E/S, W=Attente, .=inactif)\n");
     for (int i = 0; i < count; i++) {
         printf("P%d: ", proc[i].pid);
         for (int t = 0; t < max_time; t++) {
@@ -190,13 +186,19 @@ void sjrf_schedule(Process *processes, int count, ScheduleResult *result) {
         printf("\n");
     }
 
-    // Calcul des résultats
+    // --- Sortie tabulée (copiable dans Excel) ---
+    printf("\n=== Résultats individuels (copiez-collez dans Excel) ===\n");
+    // Ligne d'en-tête avec tabulations
+    printf("PID\tArrivée\tTurnaround\tAttente\tRéponse\n");
     int total_wait = 0, total_turn = 0, total_resp = 0;
     for (int i = 0; i < count; i++) {
         int turn = proc[i].finish_time - proc[i].arrival_time;
         total_turn += turn;
         total_wait += proc[i].total_wait_time;
         total_resp += proc[i].response_time;
+        printf("%d\t%d\t%d\t%d\t%d\n",
+               proc[i].pid, proc[i].arrival_time,
+               turn, proc[i].total_wait_time, proc[i].response_time);
     }
 
     result->avg_wait_time = (float)total_wait / count;
@@ -204,11 +206,13 @@ void sjrf_schedule(Process *processes, int count, ScheduleResult *result) {
     result->avg_response_time = (float)total_resp / count;
     result->cpu_utilization = (float)total_cpu / current_time * 100;
 
-    printf("\n=== Résultats SRJF ===\n");
-    printf("Temps d'attente moyen : %.2f\n", result->avg_wait_time);
-    printf("Turnaround moyen      : %.2f\n", result->avg_turnaround_time);
-    printf("Temps de réponse moyen: %.2f\n", result->avg_response_time);
-    printf("Utilisation CPU       : %.2f%%\n", result->cpu_utilization);
+    printf("\n=== Résultats synthétiques ===\n");
+    if (policy->quantum > 0)
+        printf("Quantum = %d ms\n", policy->quantum);
+    printf("Temps d'attente moyen\t%.2f ms\n", result->avg_wait_time);
+    printf("Turnaround moyen\t%.2f ms\n", result->avg_turnaround_time);
+    printf("Temps de réponse moyen\t%.2f ms\n", result->avg_response_time);
+    printf("Taux d'occupation CPU\t%.2f %%\n", result->cpu_utilization);
 
     for (int i = 0; i < count; i++) free(timeline[i]);
     free(timeline);

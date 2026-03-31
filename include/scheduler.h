@@ -5,59 +5,59 @@
 #include <limits.h>
 
 // États possibles d’un processus
-typedef enum {
-    NEW,        // Pas encore arrivé
-    READY,      // En file d’attente CPU
-    RUNNING,    // En cours d’exécution
-    WAITING,    // En attente d’E/S
-    TERMINATED
-} ProcessState;
+typedef enum { NEW, READY, RUNNING, WAITING, TERMINATED } ProcessState;
 
-// Structure pour un processus
+// Structure pour un processus (inchangée)
 typedef struct {
-    int pid;                    // Identifiant
-    int arrival_time;           // Date d’arrivée
-    int *cpu_bursts;            // Tableau des cycles CPU
-    int *io_bursts;             // Tableau des cycles E/S
-    int num_bursts;             // Nombre total de bursts
-    int current_burst_index;    // Pour suivre où il en est
-    
-    // Pour les statistiques
-    int start_time;             // Début de l’exécution (pour réponse)
-    int finish_time;            // Fin du processus
-    int total_wait_time;        // Temps d’attente cumulé (dans ready)
-    int response_time;          // Premier démarrage - arrivée
-    
-    // Pour l’ordonnancement
-    int remaining_burst;        // Temps restant du burst CPU en cours
-    int last_exec_time;         // Dernier moment exécuté (pour RR)
-    ProcessState state;         // État actuel
+    int pid;
+    int arrival_time;
+    int *cpu_bursts;
+    int *io_bursts;
+    int num_bursts;
+    int current_burst_index;
+    int start_time;
+    int finish_time;
+    int total_wait_time;
+    int response_time;
+    int remaining_burst;
+    int last_exec_time;
+    ProcessState state;
 } Process;
 
-// Structure pour les résultats
+// Structure pour les résultats (inchangée)
 typedef struct {
     float avg_wait_time;
     float avg_turnaround_time;
     float avg_response_time;
     float cpu_utilization;
-    int *wait_times;            // Par processus
-    int *turnaround_times;      // Par processus
-    int *response_times;        // Par processus
+    int *wait_times;
+    int *turnaround_times;
+    int *response_times;
 } ScheduleResult;
 
-// Structure pour l’ordonnanceur (pattern strategy)
+// Politique d'ordonnancement (fonctions de sélection)
 typedef struct {
     const char *name;
-    void (*schedule)(Process *processes, int count, ScheduleResult *result);
-} Scheduler;
+    int (*select_next)(Process **ready_queue, int ready_count, int quantum, int current_time);
+    int quantum;   // pour RR, sinon 0
+} SchedPolicy;
 
-// Déclarations des algorithmes
-void fifo_schedule(Process *processes, int count, ScheduleResult *result);
-void sjf_schedule(Process *processes, int count, ScheduleResult *result);
-void sjrf_schedule(Process *processes, int count, ScheduleResult *result);
-void rr_schedule(Process *processes, int count, ScheduleResult *result);
+// Déclarations des politiques
+extern SchedPolicy FIFO_POLICY;
+extern SchedPolicy SJF_POLICY;
+extern SchedPolicy SRJF_POLICY;
+extern SchedPolicy RR_POLICY;
 
-// Fonctions utilitaires
+// Fonctions de sélection (à implémenter dans les fichiers *_select.c)
+int fifo_select(Process **ready, int n, int quantum, int current_time);
+int sjf_select(Process **ready, int n, int quantum, int current_time);
+int sjrf_select(Process **ready, int n, int quantum, int current_time);
+int rr_select(Process **ready, int n, int quantum, int current_time);
+
+// Simulateur générique
+void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult *result);
+
+// Utilitaires (déjà existants)
 Process* read_processes_from_file(const char *filename, int *count);
 void export_to_csv(const char *filename, ScheduleResult *result, Process *processes, int count);
 void free_processes(Process *processes, int count);
