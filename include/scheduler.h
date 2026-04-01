@@ -62,4 +62,7 @@ Process* read_processes_from_file(const char *filename, int *count);
 void export_to_csv(const char *filename, ScheduleResult *result, Process *processes, int count);
 void free_processes(Process *processes, int count);
 
+
+
+void export_timeline_csv(const char *filename, char **timeline, int count, int max_time) ;
 #endif

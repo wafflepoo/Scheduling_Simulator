@@ -31,6 +31,30 @@ static int cmp_arrival(const void *a, const void *b) {
     return ((Process*)a)->arrival_time - ((Process*)b)->arrival_time;
 }
 
+
+void export_timeline_csv(const char *filename, char **timeline, int count, int max_time)
+{
+    FILE *f = fopen(filename, "w");
+    if (!f) return;
+
+    // header
+    fprintf(f, "PID");
+    for (int t = 0; t < max_time; t++)
+        fprintf(f, ",%d", t);
+    fprintf(f, "\n");
+
+    // data
+    for (int i = 0; i < count; i++) {
+        fprintf(f, "P%d", i+1);
+        for (int t = 0; t < max_time; t++) {
+            fprintf(f, ",%c", timeline[i][t]);
+        }
+        fprintf(f, "\n");
+    }
+
+    fclose(f);
+}
+
 void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult *result) {
     if (count == 0) return;
 
@@ -239,6 +263,17 @@ void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult
     printf("Temps de réponse moyen\t%.2f ms\n", result->avg_response_time);
     printf("Taux d'occupation CPU\t%.2f %%\n", result->cpu_utilization);
 
+
+// === EXPORT CSV ===
+char filename[256]; // un peu plus grand
+snprintf(filename, sizeof(filename), "results/results_%s.csv", policy->name);
+export_to_csv(filename, result, proc, count);
+
+
+char filename2[256];
+snprintf(filename2, sizeof(filename2), "results/timeline_%s.csv", policy->name);
+export_timeline_csv(filename2, timeline, count, max_time);
+    
     for (int i = 0; i < count; i++) free(timeline[i]);
     free(timeline);
     free(proc);

@@ -1,6 +1,0 @@
-PID,Response Time,Wait Time,Turnaround Time
-1,-1,0,0
-2,-1,0,-1
-
-Moyennes,1.00,3.50,17.00
-CPU Utilization,%.2f

@@ -25,11 +25,12 @@ void export_to_csv(const char *filename, ScheduleResult *result, Process *proces
                 p->total_wait_time,
                 p->finish_time - p->arrival_time);
     }
-    fprintf(file, "\nMoyennes,%.2f,%.2f,%.2f\n",
+    // Lignes commentées
+    fprintf(file, "#Moyennes,%.2f,%.2f,%.2f\n",
             result->avg_response_time,
             result->avg_wait_time,
             result->avg_turnaround_time);
-    fprintf(file, "CPU Utilization,%%.2f\n", result->cpu_utilization);
+    fprintf(file, "#CPU Utilization,%.2f\n", result->cpu_utilization);
     fclose(file);
     printf("Résultats exportés dans %s\n", filename);
 }
