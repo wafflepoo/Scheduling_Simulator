@@ -1,142 +1,184 @@
-# Scheduling_Simulator
+# Simulateur d’Ordonnancement de Processus
 
-**Simulateur d'ordonnancement de processus en C**  
-*Projet L3 Informatique - Groupe C6*
+##  Description
 
----
+Ce projet implémente un simulateur d’ordonnancement de processus en langage C. Il permet d’exécuter plusieurs algorithmes d’ordonnancement (FIFO, SJF, SRJF, Round Robin) sur un jeu de processus définis par des cycles CPU et des entrées/sorties (E/S) parallélisables.
 
-## Équipe
-| Membre | Rôle principal |
-|--------|----------------|
-| Alissa Missaoui | I/O, documentation & rapports |
-| Thomas Hornung | Algorithmes avancés |
-| Kamelia Takka | Architecture & modules de base |
+Le simulateur produit :
 
----
-
-## Diagramme de Gantt (Planification)
-
-![Diagramme de Gantt - Projet OS](L3_I-OS-GrC-C6-Gantt.png)
-
-> Ce diagramme illustre la planification des tâches, l’occupation des ressources et les jalons clés du projet.  
-> Les couleurs représentent les responsabilités principales :  
-> - Violet : Équipe complète  
-> - Bleu : P1 / Kamelia  
-> - Vert : P2 / Thomas  
-> - Orange : P3 / Alissa  
-> Les jalons importants sont indiqués par des lignes verticales colorées.
+- Une **sortie console** détaillée (chronologie, indicateurs individuels et globaux)
+- Un **export CSV** des résultats (indicateurs par processus et synthèse)
+- Un **export CSV de la timeline** pour une visualisation externe
+- Des **graphiques automatiques** (diagramme de Gantt, barres comparatives, radar, occupation CPU) via un script Python
 
 ---
 
+##  Fonctionnalités
 
-## Dates clés
-| Date | Événement | Détail |
-|------|-----------|--------|
-| 12/02/2026 | Rendu Gantt | Diagramme de planification |
-| 16/02/2026 | FIFO fonctionnel | Premier algorithme opérationnel |
-| 23/02/2026 | Architecture prête | Base modulaire finalisée |
-| 02/03/2026 | 4 algos implémentés | Tous algorithmes terminés |
-| 23/03/2026 | Tests finaux | Validation complète |
-| 03/04/2026 | **RENDU FINAL** | Archive .tgz sur Moodle |
+### Algorithmes implémentés
+- **FIFO** (First In, First Out) – non préemptif
+- **SJF** (Shortest Job First) – non préemptif
+- **SRJF** (Shortest Remaining Job First) – préemptif
+- **Round Robin** (quantum paramétrable) – préemptif
 
----
+### Gestion des processus
+- Chargement depuis un fichier texte
+- Saisie manuelle interactive
 
-## Objectifs du projet
-Le but est d’implémenter un simulateur d’ordonnancement de processus en **C**, en mode console.
-
-### Entrées
-- Processus avec durées CPU et E/S (ms)
-- Via **ligne de commande** ou fichier texte (format à définir)
+### Indicateurs calculés
+- Temps d’attente (moyen et par processus)
+- Temps de restitution (turnaround)
+- Temps de réponse
+- Taux d’occupation CPU
 
 ### Sorties
-- **Textuelle (obligatoire)** : indicateurs exportables en CSV
-- **Graphique (optionnel)**
-
-### Indicateurs obligatoires
-- Temps d’attente moyen et par processus
-- Temps de restitution (turnaround) moyen et par processus
-- Temps de réponse moyen et par processus
-- Taux d’occupation du CPU
-
-### Algorithmes à implémenter
-- FIFO  
-- SJF  
-- SJRF (SRTF)  
-- Round Robin (RR)  
-
-### Extensibilité
-Architecture modulaire pour ajouter facilement d’autres algorithmes (décrite dans le rapport développeur).
+- Chronologie textuelle (`U` = CPU, `O` = E/S, `W` = Attente, `.` = inactif)
+- Tableau tabulé copiable dans un tableur
+- Export CSV (`results/results_*.csv`) et timeline (`results/timeline_*.csv`)
+- Génération de graphiques (Python + Matplotlib)
 
 ---
 
-## Livrables
-Archive finale : `L3_I-OS-Projet-NOM1-NOM2-NOM3.tgz` comprenant :
+##  Installation
 
-1. **Code source en C**  
-   - Commenté avec en-tête indiquant la participation de chaque membre  
-   - Compatible Doxygen
-2. **Makefile**  
-   - Génération exécutable et documentation
-3. **Rapport développeur (PDF)**  
-   - Structures de données et algorithmes  
-   - Guide ajout de nouveaux algorithmes
-4. **Guide d’utilisation (Markdown)**  
-   - Installation et utilisation
-5. **Diaporama (ODP + PDF)**  
-   - Maximum 12 diapositives
-6. **Vidéo de démonstration (MKV, H.265, 1080p)**  
-   - Durée max 3 minutes  
-   - Présentation complète des fonctionnalités
-
-### Bonus possibles
-- Interface graphique pour résultats
-- Génération automatique de graphiques
-- Gestion des E/S non parallélisables
-
----
-
-## Échéances importantes 
-- Dépôt final : archive Moodle avant le 03/04/2026  
-  - Pénalité : 1 point/jour (max 5 points)  
-- Soutenance : 7, 8 ou 9 avril 2026  
-  - 20 min (10 min présentation + 10 min questions)
-
----
-
-## Méthode de gestion (FDD)
-- **Modélisation initiale** : architecture du simulateur, structures et interfaces  
-- **Liste des features** :
-  1. Lecture fichier/commande  
-  2. Algorithme FIFO  
-  3. Algorithme SJF  
-  4. Algorithme SJRF  
-  5. Algorithme RR  
-  6. Calcul indicateurs  
-  7. Export CSV  
-  8. Sortie graphique (optionnel)  
-  9. Bonus
-- **Planification par feature** : Février → Avril  
-- **Développement itératif** : chaque feature est conçue, codée, testée et intégrée avant la suivante  
-- **Livraisons régulières** : versions fonctionnelles partielles disponibles après chaque feature
-
----
-
-## Installation rapide
+### Prérequis
+- **Compilateur C** (GCC recommandé)
+- **make** (GNU make)
+- **Python 3** et les bibliothèques suivantes : 
 ```bash
-git clone https://github.com/votre-compte/Scheduling_Simulator.git
-cd Scheduling_Simulator
+pip install matplotlib pandas
+```
+- **Doxygen**  (optionnel, pour la documentation)
+
+
+##  Compilation
+Placez-vous dans le répertoire racine du projet et lancez :
+```bash
 make
-./Scheduling_Simulator input.txt
+```
+L’exécutable scheduler (ou scheduler.exe sous Windows) sera créé.
+
+## Génération de la documentation
+
+```bash
+make doc
+```
+La documentation HTML sera générée dans le dossier doc/.
+
+## Utilisation
+
+Lancez le programme :
+
+```bash
+./scheduler
 ```
 
+
+Un menu interactif vous guide :
+
+- **Charger un fichier de processus (ou saisie manuelle)**
+**Choisir l’algorithme (FIFO, SJF, SRJF, RR – avec quantum modifiable)**
+- **Lancer la simulation**
+- **Exporter les résultats en CSV (fichiers dans results/)**
+- **Visualiser avec matplotlib (génère et affiche les graphiques)**
+
+Vous pouvez également exécuter directement en ligne de commande :
+
+
+```bash
+./scheduler <fichier> [algorithme] [fichier_csv]
+```
+### Exemple
+
+```bash
+./scheduler tests/exemple.txt fifo resultats.csv
+```
+
+
+## Format du fichier d’entrée
+Le fichier texte doit contenir une ligne par processus, au format :
+
+
+```bash
+PID arrival cpu1 io1 cpu2 io2 ... cpuN
+```
+
+- **PID : identifiant (entier)**
+- **arrival : temps d’arrivée (ms)**
+- **cpuX : durée du X-ième burst CPU (ms)**
+- **ioX : durée de l’E/S après le X-ième burst (sauf après le dernier burst)**
+
+### Exemple
+
+```bash
+1 0 3 2 2 2 2
+2 1 2 2 3 3 2
+```
+
+Les lignes commençant par # sont ignorées (commentaires).
+
+## Sorties
+
+### Console
+- **Chronologie de l’exécution**
+- **Tableau des résultats individuels (PID, arrivée, turnaround, attente, réponse) en format CSV**
+- **Résumé synthétique**
+
+
+
+### Fichiers CSV 
+- **results/results_<algorithme>.csv : indicateurs par processus + moyennes**
+- **results/timeline_<algorithme>.csv : état de chaque processus pour chaque unité de temps (U, O, W, .)**
+
+### Graphiques (Python)
+Exécutez l’option correspondante du menu pour générer automatiquement :
+
+- **gantt_<algo>.png : diagramme de Gantt**
+- **barchart_<algo>.png : barres comparatives**
+- **radar_<algo>.png : diagramme radar**
+- **cpu_usage_<algo>.png : occupation CPU**
+
+
+```bash
+pip install matplotlib pandas
 ## Structure du projet
 ```bash
 Scheduling_Simulator/
-├── src/                    # Code source C
-├── include/                # Headers
-├── docs/                   # Documentation
-├── tests/                  # Tests
-├── examples/               # Fichiers d'exemple
+.
 ├── Makefile
-└── README.md               # Ce fichier
+├── Doxyfile
+├── README.md
+├── include/
+│   └── scheduler.h
+├── src/
+│   ├── main.c
+│   ├── simulator.c
+│   ├── fifo_select.c
+│   ├── sjf_select.c
+│   ├── sjrf_select.c
+│   ├── rr_select.c
+│   ├── policies.c
+│   ├── parser.c
+│   └── utils.c
+├── results/
+├── tests/
+└── plot_gantt.py
 ```
+
+## Dépendances
+
+- **GCC (ou tout compilateur C compatible)**
+- **make**
+- **Python 3 avec matplotlib et pandas**
+- **Doxygen**
+
+## Auteurs
+Ce projet a été réalisé dans le cadre du cours d’OS (L3 Informatique).
+
+Membres du groupe :
+MISSAOUI Alissa
+TAKKA Kamelia
+HORNUNG Thomas
+
+## Licence
+Ce projet est fourni à des fins pédagogiques. Toute réutilisation est soumise à l’accord des auteurs.
