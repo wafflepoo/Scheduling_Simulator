@@ -1,29 +1,44 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -g -Iinclude
-SRCDIR = src
-OBJDIR = obj
-SOURCES = $(wildcard $(SRCDIR)/*.c)
-OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-EXEC = scheduler
+CC      = gcc
+CFLAGS  = -Wall -Wextra -Iinclude -g
+TARGET  = simulateur
+SRCDIR  = src
+INCDIR  = include
+OBJDIR  = obj
 
-all: $(EXEC)
+SRCS = $(wildcard $(SRCDIR)/*.c)
+OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-$(EXEC): $(OBJECTS)
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
 	$(CC) $^ -o $@
+	@echo "Compilation réussie : ./$(TARGET)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):
-	if not exist $(OBJDIR) mkdir $(OBJDIR)
+	mkdir -p $(OBJDIR)
 
 doc:
+	@which doxygen > /dev/null 2>&1 || \
+		{ echo "Erreur : doxygen n'est pas installé."; exit 1; }
 	doxygen Doxyfile
+	@echo "Documentation générée dans doc/html/index.html"
+
+install: $(TARGET)
+	@if [ -w /usr/local/bin ]; then \
+		cp $(TARGET) /usr/local/bin/$(TARGET); \
+		echo "Installé dans /usr/local/bin/$(TARGET)"; \
+	else \
+		mkdir -p $(HOME)/bin; \
+		cp $(TARGET) $(HOME)/bin/$(TARGET); \
+		echo "Droits insuffisants sur /usr/local/bin."; \
+		echo "Installé dans $(HOME)/bin/$(TARGET)"; \
+	fi
 
 clean:
-	rm -rf $(OBJDIR) $(EXEC) doc/
+	rm -rf $(OBJDIR) $(TARGET) doc/html doc/latex
+	@echo "Nettoyage terminé"
 
-install: $(EXEC)
-	cp $(EXEC) /usr/local/bin/
-
-.PHONY: all doc clean install
+.PHONY: all doc install clean
