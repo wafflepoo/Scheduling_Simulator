@@ -133,6 +133,32 @@ void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult
             free(tmp);
         }
 
+        // ========== AJOUT : PRÉEMPTION POUR SRJF ==========
+        if (running != NULL && strcmp(policy->name, "SRJF") == 0) {
+            int ready_count = (ready_tail - ready_head + 100) % 100;
+            if (ready_count > 0) {
+                // Trouver l'indice du processus prêt avec le plus court temps restant
+                int idx = policy->select_next(ready, ready_count, 0, current_time);
+                if (idx >= 0) {
+                    int real_idx = (ready_head + idx) % 100;
+                    Process *shortest = ready[real_idx];
+                    // Si le processus prêt a un temps restant strictement plus court,
+                    // on préempte le processus courant
+                    if (shortest->remaining_burst < running->remaining_burst) {
+                        // Remettre le processus courant dans la file des prêts
+                        ready[ready_tail] = running;
+                        ready_tail = (ready_tail + 1) % 100;
+                        printf("[T=%d] P%d préempté par P%d (burst restant %d < %d)\n",
+                               current_time, running->pid, shortest->pid,
+                               shortest->remaining_burst, running->remaining_burst);
+                        running = NULL;
+                        remaining_quantum = 0; // SRJF n'utilise pas de quantum
+                    }
+                }
+            }
+        }
+        // ========== FIN AJOUT ==========
+
         if (running && running->remaining_burst == 0) {
             running->current_burst_index++;
             if (running->current_burst_index == running->num_bursts) {
@@ -175,7 +201,7 @@ void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult
         }
     }
 
-    // Chronologie (optionnelle, mais conservée)
+    // Chronologie (optionnelle)
     printf("\nChronologie (U=CPU, O=E/S, W=Attente, .=inactif)\n");
     for (int i = 0; i < count; i++) {
         printf("P%d: ", proc[i].pid);
@@ -188,7 +214,6 @@ void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult
 
     // --- Sortie tabulée (copiable dans Excel) ---
     printf("\n=== Résultats individuels (copiez-collez dans Excel) ===\n");
-    // Ligne d'en-tête avec tabulations
     printf("PID\tArrivée\tTurnaround\tAttente\tRéponse\n");
     int total_wait = 0, total_turn = 0, total_resp = 0;
     for (int i = 0; i < count; i++) {
