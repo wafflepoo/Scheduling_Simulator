@@ -236,19 +236,19 @@ void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult
         printf("\n");
     }
 
-    // --- Sortie tabulée (copiable dans Excel) ---
-    printf("\n=== Résultats individuels (copiez-collez dans Excel) ===\n");
-    printf("PID\tArrivée\tTurnaround\tAttente\tRéponse\n");
-    int total_wait = 0, total_turn = 0, total_resp = 0;
-    for (int i = 0; i < count; i++) {
-        int turn = proc[i].finish_time - proc[i].arrival_time;
-        total_turn += turn;
-        total_wait += proc[i].total_wait_time;
-        total_resp += proc[i].response_time;
-        printf("%d\t%d\t%d\t%d\t%d\n",
-               proc[i].pid, proc[i].arrival_time,
-               turn, proc[i].total_wait_time, proc[i].response_time);
-    }
+// --- Sortie CSV (copiable dans Excel) ---
+printf("\n=== Resultats individuels (copiez-collez dans Excel) ===\n");
+printf("PID,Arrivee,Turnaround,Attente,Reponse\n");
+int total_wait = 0, total_turn = 0, total_resp = 0;
+for (int i = 0; i < count; i++) {
+    int turn = proc[i].finish_time - proc[i].arrival_time;
+    total_turn += turn;
+    total_wait += proc[i].total_wait_time;
+    total_resp += proc[i].response_time;
+    printf("%d,%d,%d,%d,%d\n",
+           proc[i].pid, proc[i].arrival_time,
+           turn, proc[i].total_wait_time, proc[i].response_time);
+}
 
     result->avg_wait_time = (float)total_wait / count;
     result->avg_turnaround_time = (float)total_turn / count;

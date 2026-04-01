@@ -3,6 +3,10 @@
 #include <string.h>
 #include "scheduler.h"
 
+
+
+
+
 // Pour mkdir
 #include <sys/stat.h>
 #ifdef _WIN32
@@ -93,9 +97,9 @@ void clear_screen(void) {
 }
 
 void print_header(const char *title) {
-    printf(BOLD CYAN "╔══════════════════════════════════════════════════════════╗\n");
-    printf("║  %-50s  ║\n", title);
-    printf("╚══════════════════════════════════════════════════════════╝\n\n" RESET);
+    printf(BOLD CYAN "+------------------------------------------------------------+\n");
+    printf("|  %-50s  |\n", title);
+    printf("+------------------------------------------------------------+\n\n" RESET);
 }
 
 void print_menu(void) {
@@ -373,24 +377,13 @@ void visualize_with_matplotlib(void) {
         return;
     }
 
-    // Exécuter la simulation pour générer les fichiers CSV (timeline)
+    // Lancer la simulation pour générer les CSV
     ScheduleResult result;
     simulate(loaded_processes, process_count, current_policy, &result);
 
-    char timeline_csv[256];
-    snprintf(timeline_csv, sizeof(timeline_csv), "results/timeline_%s.csv", current_policy->name);
-
-    // Nom du fichier de sortie PNG
-    char output_png[256];
-    snprintf(output_png, sizeof(output_png), "results/gantt_%s.png", current_policy->name);
-
-    // Chemin du script Python (supposé dans le répertoire courant)
-    const char *script_path = "plot_gantt.py";
-
-    // Construction de la commande : python script.py timeline.csv output.png
+    // Appeler le script Python unifié
     char cmd[512];
-    snprintf(cmd, sizeof(cmd), "python \"%s\" \"%s\" \"%s\"", script_path, timeline_csv, output_png);
-
+    snprintf(cmd, sizeof(cmd), "python plot_gantt.py \"%s\" --show", current_policy->name);
     printf("\nExécution de : %s\n", cmd);
     int ret = system(cmd);
     if (ret != 0) {
@@ -398,7 +391,7 @@ void visualize_with_matplotlib(void) {
         printf(YELLOW "Vérifiez que Python et les bibliothèques (matplotlib, pandas) sont installés.\n" RESET);
         printf(YELLOW "   pip install matplotlib pandas\n" RESET);
     } else {
-        printf(GREEN "Diagramme de Gantt généré : %s\n" RESET, output_png);
+        printf(GREEN "Tous les graphiques ont été générés dans le dossier results/\n" RESET);
     }
     wait_for_enter();
 }
