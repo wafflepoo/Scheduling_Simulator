@@ -139,8 +139,7 @@ Exécutez l’option correspondante du menu pour générer automatiquement :
 - **cpu_usage_<algo>.png : occupation CPU**
 
 
-```bash
-pip install matplotlib pandas
+
 ## Structure du projet
 ```bash
 Scheduling_Simulator/
