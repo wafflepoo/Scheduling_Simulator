@@ -86,12 +86,12 @@ Vous pouvez également exécuter directement en ligne de commande :
 
 
 ```bash
-./scheduler <fichier> [algorithme] [fichier_csv]
+./simulateur <fichier> [algorithme] [fichier_csv] 
 ```
 ### Exemple
 
 ```bash
-./scheduler tests/exemple.txt fifo resultats.csv
+./simulateur tests/exemple.txt fifo resultats.csv
 ```
 
 
