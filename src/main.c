@@ -1,7 +1,7 @@
 /**
  * @file main.c
  * @brief Interface utilisateur interactive du simulateur d'ordonnancement
- * @authors MISSAOUI Alissa (100%), TAKKA Kamelia (0%), HORNUNG Thomas (0%)
+ * @authors MISSAOUI Alissa (50%), TAKKA Kamelia (25%), HORNUNG Thomas (25%)
  * @date 2026-04-02
  * 
  * Ce fichier contient le menu principal, la gestion des entrées utilisateur,

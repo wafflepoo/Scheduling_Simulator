@@ -1,7 +1,7 @@
 /**
  * @file utils.c
  * @brief Fonctions utilitaires : libération mémoire et export CSV
- * @authors MISSAOUI Alissa (100%), TAKKA Kamelia (0%), HORNUNG Thomas (0%)
+ * @authors MISSAOUI Alissa (20%), TAKKA Kamelia (40%), HORNUNG Thomas (40%)
  * @date 2026-04-02
  * 
  * Ce module fournit deux fonctions essentielles :
