@@ -238,9 +238,9 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>Nom du fichier de sortie. </td></tr>
-    <tr><td class="paramname">timeline</td><td>Tableau 2D des états (count lignes, max_time colonnes). </td></tr>
+    <tr><td class="paramname">timeline</td><td>Tableau 2D des etats (count lignes, max_time colonnes). </td></tr>
     <tr><td class="paramname">count</td><td>Nombre de processus. </td></tr>
-    <tr><td class="paramname">max_time</td><td>Durée totale simulée (nombre de colonnes). </td></tr>
+    <tr><td class="paramname">max_time</td><td>Duree totale simulee (nombre de colonnes). </td></tr>
   </table>
   </dd>
 </dl>
@@ -461,7 +461,7 @@ Les champs internes (remaining_burst, response_time, etc.) sont initialisés. </
 </div><div class="memdoc">
 
 <p>Sélectionne le prochain processus pour l'algorithme Round Robin. </p>
-<p>Round Robin utilise un ordre circulaire : le processus suivant est toujours le premier de la file d'attente. La préemption par quantum est gérée par la boucle principale de simulation (<a class="el" href="simulator_8c.html" title="Cœur du simulateur d&#39;ordonnancement : boucle événementielle et gestion des files.">simulator.c</a>), pas par cette fonction.</p>
+<p>Round Robin utilise un ordre circulaire : le processus suivant est toujours le premier de la file d'attente. La préemption par quantum est gérée par la boucle principale de simulation (<a class="el" href="simulator_8c.html" title="Cœur du simulateur d&#39;ordonnancement : boucle evenementielle et gestion des files.">simulator.c</a>), pas par cette fonction.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ready</td><td>Tableau de pointeurs vers les processus prêts. </td></tr>
@@ -515,19 +515,19 @@ Les champs internes (remaining_burst, response_time, etc.) sont initialisés. </
   </dd>
 </dl>
 <p>Lance la simulation avec une politique donnée.</p>
-<p>Cette fonction implémente un moteur à événements discrets. Elle gère :</p><ul>
-<li>Les arrivées de nouveaux processus (ajout dans la file READY)</li>
-<li>Les fins de burst CPU (passage à l'E/S ou terminaison)</li>
-<li>Les fins d'E/S (réinsertion dans la file READY)</li>
+<p>Cette fonction implemente un moteur a evenements discrets. Elle gere :</p><ul>
+<li>Les arrivees de nouveaux processus (ajout dans la file READY)</li>
+<li>Les fins de burst CPU (passage a l'E/S ou terminaison)</li>
+<li>Les fins d'E/S (reinsertion dans la file READY)</li>
 <li>Les fins de quantum (Round Robin)</li>
-<li>La préemption SRJF (comparaison des remaining_burst)</li>
+<li>La preemption SRJF (comparaison des remaining_burst)</li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">processes</td><td>Tableau original des processus (non modifié). </td></tr>
+    <tr><td class="paramname">processes</td><td>Tableau original des processus (non modifie). </td></tr>
     <tr><td class="paramname">count</td><td>Nombre de processus. </td></tr>
     <tr><td class="paramname">policy</td><td>Politique d'ordonnancement (FIFO, SJF, SRJF, RR). </td></tr>
-    <tr><td class="paramname">result</td><td>Structure qui recevra les métriques de performance. </td></tr>
+    <tr><td class="paramname">result</td><td>Structure qui recevra les metriques de performance. </td></tr>
   </table>
   </dd>
 </dl>
@@ -608,7 +608,7 @@ Les champs internes (remaining_burst, response_time, etc.) sont initialisés. </
 </div><div class="memdoc">
 
 <p>Sélectionne le processus avec le plus petit temps restant (remaining_burst). </p>
-<p>Parcourt la file des processus prêts et compare leur remaining_burst. Cette fonction est appelée par le simulateur pour déterminer quel processus devrait être exécuté en priorité. La préemption effective est gérée dans la boucle principale de <a class="el" href="simulator_8c.html#abae1dab215146d14e2d5987580b8d4d8" title="Lance la simulation d&#39;ordonnancement pour une politique donnée.">simulate()</a>.</p>
+<p>Parcourt la file des processus prêts et compare leur remaining_burst. Cette fonction est appelée par le simulateur pour déterminer quel processus devrait être exécuté en priorité. La préemption effective est gérée dans la boucle principale de <a class="el" href="simulator_8c.html#abae1dab215146d14e2d5987580b8d4d8" title="Lance la simulation d&#39;ordonnancement pour une politique donnee.">simulate()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ready</td><td>Tableau de pointeurs vers les processus prêts. </td></tr>
@@ -723,7 +723,7 @@ Les champs internes (remaining_burst, response_time, etc.) sont initialisés. </
 
 <p>Politique SRJF (Shortest Remaining Job First) – préemptive. </p>
 <p>Politique Shortest Remaining Job First (préemptif)</p>
-<p>La fonction <a class="el" href="sjrf__select_8c.html#a516f8087f67a4b27ae4500c112380e69" title="Sélectionne le processus avec le plus petit temps restant (remaining_burst).">sjrf_select()</a> sélectionne le processus prêt ayant le remaining_burst (temps restant du burst courant) le plus petit. La préemption est gérée dans <a class="el" href="simulator_8c.html#abae1dab215146d14e2d5987580b8d4d8" title="Lance la simulation d&#39;ordonnancement pour une politique donnée.">simulate()</a>. Quantum = 0 (non utilisé). </p>
+<p>La fonction <a class="el" href="sjrf__select_8c.html#a516f8087f67a4b27ae4500c112380e69" title="Sélectionne le processus avec le plus petit temps restant (remaining_burst).">sjrf_select()</a> sélectionne le processus prêt ayant le remaining_burst (temps restant du burst courant) le plus petit. La préemption est gérée dans <a class="el" href="simulator_8c.html#abae1dab215146d14e2d5987580b8d4d8" title="Lance la simulation d&#39;ordonnancement pour une politique donnee.">simulate()</a>. Quantum = 0 (non utilisé). </p>
 
 </div>
 </div>

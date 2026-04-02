@@ -1,7 +1,7 @@
 /**
  * @file policies.c
  * @brief Définition des politiques d'ordonnancement prédéfinies
- * @authors MISSAOUI Alissa (100%), TAKKA Kamelia (0%), HORNUNG Thomas (0%)
+ * @authors MISSAOUI Alissa (30%), TAKKA Kamelia (40%), HORNUNG Thomas (30%)
  * @date 2026-04-02
  * 
  * Ce fichier instancie les quatre structures SchedPolicy correspondant

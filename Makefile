@@ -12,7 +12,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CC) $^ -o $@
-	@echo "Compilation réussie : ./$(TARGET)"
+	@echo "Compilation reussie : ./$(TARGET)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@

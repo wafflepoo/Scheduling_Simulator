@@ -47,7 +47,7 @@ void free_processes(Process *processes, int count) {
 void export_to_csv(const char *filename, ScheduleResult *result, Process *processes, int count) {
     FILE *file = fopen(filename, "w");
     if (!file) {
-        perror("Erreur création fichier CSV");
+        perror("Erreur creation fichier CSV");
         return;
     }
     
@@ -72,5 +72,5 @@ void export_to_csv(const char *filename, ScheduleResult *result, Process *proces
     fprintf(file, "#CPU Utilization,%.2f\n", result->cpu_utilization);
     
     fclose(file);
-    printf("Résultats exportés dans %s\n", filename);
+    printf("Resultats exportes dans %s\n", filename);
 }

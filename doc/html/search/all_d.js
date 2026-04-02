@@ -11,6 +11,7 @@ var searchData=
   ['rr_5fpolicy_8',['RR_POLICY',['../main_8c.html#a588668f5ff0f5ed85837a722b1176bb4',1,'RR_POLICY:&#160;policies.c'],['../policies_8c.html#a588668f5ff0f5ed85837a722b1176bb4',1,'RR_POLICY:&#160;policies.c'],['../scheduler_8h.html#a588668f5ff0f5ed85837a722b1176bb4',1,'RR_POLICY:&#160;policies.c']]],
   ['rr_5fselect_9',['rr_select',['../rr__select_8c.html#ae9c8f637eb0293d4911549ce10a7c9c2',1,'rr_select(Process **ready, int n, int quantum, int current_time):&#160;rr_select.c'],['../scheduler_8h.html#ae9c8f637eb0293d4911549ce10a7c9c2',1,'rr_select(Process **ready, int n, int quantum, int current_time):&#160;rr_select.c']]],
   ['rr_5fselect_2ec_10',['rr_select.c',['../rr__select_8c.html',1,'']]],
-  ['run_5fsimulation_5finteractive_11',['run_simulation_interactive',['../main_8c.html#a840d2df91a0adef27bf69dfad3109148',1,'main.c']]],
-  ['running_12',['RUNNING',['../scheduler_8h.html#a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304',1,'scheduler.h']]]
+  ['run_5fsimulation_5ffrom_5fargs_11',['run_simulation_from_args',['../main_8c.html#a28c5cefbfcaad6ff2468ecd0872927cc',1,'main.c']]],
+  ['run_5fsimulation_5finteractive_12',['run_simulation_interactive',['../main_8c.html#a840d2df91a0adef27bf69dfad3109148',1,'main.c']]],
+  ['running_13',['RUNNING',['../scheduler_8h.html#a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304',1,'scheduler.h']]]
 ];

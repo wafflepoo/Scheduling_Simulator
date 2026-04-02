@@ -4,8 +4,8 @@
  * @authors MISSAOUI Alissa (50%), TAKKA Kamelia (25%), HORNUNG Thomas (25%)
  * @date 2026-04-02
  * 
- * Ce fichier contient le menu principal, la gestion des entrées utilisateur,
- * le chargement des processus (fichier ou saisie manuelle), la sélection
+ * Ce fichier contient le menu principal, la gestion des entrees utilisateur,
+ * le chargement des processus (fichier ou saisie manuelle), la selection
  * de l'algorithme, le lancement de la simulation, l'export CSV et l'appel
  * au script Python de visualisation.
  */
@@ -15,7 +15,7 @@
 #include <string.h>
 #include "scheduler.h"
 
-/* Inclusion pour la création de répertoire (mkdir) */
+/* Inclusion pour la creation de repertoire (mkdir) */
 #include <sys/stat.h>
 #ifdef _WIN32
 #include <direct.h>
@@ -24,7 +24,7 @@
 #define MKDIR(p) mkdir(p, 0755)
 #endif
 
-/* Déclarations externes des politiques d'ordonnancement (définies dans policies.c) */
+/* Declarations externes des politiques d'ordonnancement (definies dans policies.c) */
 extern SchedPolicy FIFO_POLICY;
 extern SchedPolicy SJF_POLICY;
 extern SchedPolicy SRJF_POLICY;
@@ -40,12 +40,12 @@ extern SchedPolicy RR_POLICY;
 #define CYAN    "\033[36m"
 #define BOLD    "\033[1m"
 
-/* Variables globales (état de la session) */
-static Process *loaded_processes = NULL;   /**< Tableau des processus chargés */
-static int process_count = 0;              /**< Nombre de processus chargés */
-static SchedPolicy *current_policy = NULL; /**< Politique d'ordonnancement sélectionnée */
+/* Variables globales (etat de la session) */
+static Process *loaded_processes = NULL;   /**< Tableau des processus charges */
+static int process_count = 0;              /**< Nombre de processus charges */
+static SchedPolicy *current_policy = NULL; /**< Politique d'ordonnancement selectionnee */
 
-/* Prototypes des fonctions internes (définies plus bas) */
+/* Prototypes des fonctions internes (definies plus bas) */
 void clear_screen(void);
 void print_header(const char *title);
 void print_menu(void);
@@ -60,20 +60,20 @@ void flush_stdin(void);
 void run_simulation_from_args(const char *filename, const char *algo, const char *csv_output);
 
 /* ========================================================================
- * Point d'entrée principal
+ * Point d'entree principal
  * ======================================================================== */
 
 /**
  * @brief Programme principal – boucle interactive du menu.
  * 
- * Initialise l'interface, puis répète l'affichage du menu et le traitement
- * du choix utilisateur jusqu'à la sélection de l'option Quitter (7).
+ * Initialise l'interface, puis repete l'affichage du menu et le traitement
+ * du choix utilisateur jusqu'à la selection de l'option Quitter (7).
  * 
- * @return int Code de retour (0 = succès).
+ * @return int Code de retour (0 = succes).
  */
 int main(int argc, char *argv[]) {
 
-    // Si des arguments sont passés, mode ligne de commande
+    // Si des arguments sont passes, mode ligne de commande
     if (argc >= 3) {
         const char *csv_output = (argc >= 4) ? argv[3] : NULL;
         run_simulation_from_args(argv[1], argv[2], csv_output);
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
         }
     } while (choice != 7);
 
-    /* Libération de la mémoire avant de quitter */
+    /* Liberation de la memoire avant de quitter */
     if (loaded_processes != NULL) {
         free_processes(loaded_processes, process_count);
         loaded_processes = NULL;
@@ -118,13 +118,13 @@ int main(int argc, char *argv[]) {
 }
 
 /* ========================================================================
- * Fonctions utilitaires (entrée/sortie, affichage)
+ * Fonctions utilitaires (entree/sortie, affichage)
  * ======================================================================== */
 
 /**
- * @brief Vide le tampon d'entrée standard (supprime les caractères résiduels).
+ * @brief Vide le tampon d'entree standard (supprime les caracteres residuels).
  * 
- * Utilisé après scanf pour éviter qu'un '\n' restant ne perturbe la saisie suivante.
+ * Utilise apres scanf pour eviter qu'un '\n' restant ne perturbe la saisie suivante.
  */
 void flush_stdin(void) {
     int c;
@@ -132,14 +132,14 @@ void flush_stdin(void) {
 }
 
 /**
- * @brief Efface l'écran du terminal (commande ANSI).
+ * @brief Efface l'ecran du terminal (commande ANSI).
  */
 void clear_screen(void) {
     printf("\033[2J\033[1;1H");
 }
 
 /**
- * @brief Affiche un en-tête encadré en couleur.
+ * @brief Affiche un en-tête encadre en couleur.
  * 
  * @param title Texte à afficher au centre de l'en-tête.
  */
@@ -150,7 +150,7 @@ void print_header(const char *title) {
 }
 
 /**
- * @brief Affiche le menu principal avec les options colorées.
+ * @brief Affiche le menu principal avec les options colorees.
  */
 void print_menu(void) {
     printf(BOLD "MENU PRINCIPAL\n" RESET);
@@ -158,7 +158,7 @@ void print_menu(void) {
     printf("2. " GREEN "Saisie manuelle des processus\n" RESET);
     printf("3. " YELLOW "Choisir l'algorithme d'ordonnancement\n" RESET);
     printf("4. " BLUE "Lancer la simulation\n" RESET);
-    printf("5. " MAGENTA "Exporter les résultats en CSV\n" RESET);
+    printf("5. " MAGENTA "Exporter les resultats en CSV\n" RESET);
     printf("6. " CYAN "Visualiser avec matplotlib (Python)\n" RESET);
     printf("7. " RED "Quitter\n" RESET);
 }
@@ -171,7 +171,7 @@ void print_menu(void) {
  * @brief Charge des processus à partir d'un fichier texte.
  * 
  * Demande le chemin du fichier, appelle read_processes_from_file(),
- * puis affiche la liste des processus chargés.
+ * puis affiche la liste des processus charges.
  */
 void load_processes_interactive(void) {
     clear_screen();
@@ -186,7 +186,7 @@ void load_processes_interactive(void) {
     }
     filename[strcspn(filename, "\n")] = '\0';
 
-    /* Libération de l'ancien jeu de processus s'il existe */
+    /* Liberation de l'ancien jeu de processus s'il existe */
     if (loaded_processes != NULL) {
         free_processes(loaded_processes, process_count);
         loaded_processes = NULL;
@@ -194,11 +194,11 @@ void load_processes_interactive(void) {
 
     loaded_processes = read_processes_from_file(filename, &process_count);
     if (loaded_processes == NULL) {
-        printf(RED "Échec du chargement. Vérifiez le fichier.\n" RESET);
+        printf(RED "Echec du chargement. Verifiez le fichier.\n" RESET);
     } else {
-        printf(GREEN "✓ %d processus chargés.\n" RESET, process_count);
+        printf(GREEN " %d processus charges.\n" RESET, process_count);
         printf("\n" BOLD "Liste des processus :\n" RESET);
-        printf("PID\tArrivée\tBursts CPU (IO)\n");
+        printf("PID\tArrivee\tBursts CPU (IO)\n");
         for (int i = 0; i < process_count; i++) {
             Process *p = &loaded_processes[i];
             printf("%d\t%d\t", p->pid, p->arrival_time);
@@ -217,11 +217,11 @@ void load_processes_interactive(void) {
  * @brief Saisie interactive manuelle des processus.
  * 
  * L'utilisateur entre le nombre de processus, puis pour chacun :
- *   - temps d'arrivée
+ *   - temps d'arrivee
  *   - nombre de bursts CPU
- *   - pour chaque burst : durée CPU, puis durée E/S (sauf après le dernier burst)
+ *   - pour chaque burst : duree CPU, puis duree E/S (sauf apres le dernier burst)
  * 
- * Les processus sont stockés dans la variable globale loaded_processes.
+ * Les processus sont stockes dans la variable globale loaded_processes.
  */
 void load_processes_manual(void) {
     clear_screen();
@@ -239,7 +239,7 @@ void load_processes_manual(void) {
 
     Process *proc = malloc(n * sizeof(Process));
     if (!proc) {
-        printf(RED "Erreur d'allocation mémoire.\n" RESET);
+        printf(RED "Erreur d'allocation memoire.\n" RESET);
         wait_for_enter();
         return;
     }
@@ -248,7 +248,7 @@ void load_processes_manual(void) {
         printf("\n--- Processus %d ---\n", i+1);
         proc[i].pid = i+1;
         
-        printf("Temps d'arrivée (ms) : ");
+        printf("Temps d'arrivee (ms) : ");
         if (scanf("%d", &proc[i].arrival_time) != 1) {
             flush_stdin();
             printf(RED "Erreur de saisie.\n" RESET);
@@ -283,10 +283,10 @@ void load_processes_manual(void) {
         }
 
         for (int j = 0; j < nb; j++) {
-            printf("  Durée du burst CPU %d : ", j+1);
+            printf("  Duree du burst CPU %d : ", j+1);
             if (scanf("%d", &proc[i].cpu_bursts[j]) != 1 || proc[i].cpu_bursts[j] <= 0) {
                 flush_stdin();
-                printf(RED "Durée invalide.\n" RESET);
+                printf(RED "Duree invalide.\n" RESET);
                 free(proc[i].cpu_bursts);
                 free(proc[i].io_bursts);
                 free(proc);
@@ -296,10 +296,10 @@ void load_processes_manual(void) {
             flush_stdin();
             
             if (j < nb - 1) {
-                printf("  Durée de l'E/S après ce burst : ");
+                printf("  Duree de l'E/S apres ce burst : ");
                 if (scanf("%d", &proc[i].io_bursts[j]) != 1 || proc[i].io_bursts[j] <= 0) {
                     flush_stdin();
-                    printf(RED "Durée d'E/S invalide.\n" RESET);
+                    printf(RED "Duree d'E/S invalide.\n" RESET);
                     free(proc[i].cpu_bursts);
                     free(proc[i].io_bursts);
                     free(proc);
@@ -310,7 +310,7 @@ void load_processes_manual(void) {
             }
         }
 
-        /* Initialisation des champs dynamiques (état, temps restant, ...) */
+        /* Initialisation des champs dynamiques (etat, temps restant, ...) */
         proc[i].current_burst_index = 0;
         proc[i].remaining_burst = proc[i].cpu_bursts[0];
         proc[i].total_wait_time = 0;
@@ -328,9 +328,9 @@ void load_processes_manual(void) {
     loaded_processes = proc;
     process_count = n;
 
-    printf(GREEN "\n✓ %d processus saisis avec succès.\n" RESET, n);
+    printf(GREEN "\n %d processus saisis avec succes.\n" RESET, n);
     printf("\n" BOLD "Liste des processus :\n" RESET);
-    printf("PID\tArrivée\tBursts CPU (IO)\n");
+    printf("PID\tArrivee\tBursts CPU (IO)\n");
     for (int i = 0; i < process_count; i++) {
         Process *p = &loaded_processes[i];
         printf("%d\t%d\t", p->pid, p->arrival_time);
@@ -346,7 +346,7 @@ void load_processes_manual(void) {
 }
 
 /* ========================================================================
- * Sélection de l'algorithme
+ * Selection de l'algorithme
  * ======================================================================== */
 
 /**
@@ -360,15 +360,15 @@ void select_algorithm_interactive(void) {
     print_header("CHOIX DE L'ALGORITHME");
 
     printf("1. FIFO (First In, First Out)\n");
-    printf("2. SJF (Shortest Job First) - non préemptif\n");
-    printf("3. SRJF (Shortest Remaining Job First) - préemptif\n");
+    printf("2. SJF (Shortest Job First) - non preemptif\n");
+    printf("3. SRJF (Shortest Remaining Job First) - preemptif\n");
     printf("4. Round Robin (avec quantum modifiable)\n");
     printf("Choisissez (1-4) : ");
 
     int algo;
     if (scanf("%d", &algo) != 1) {
         flush_stdin();
-        printf(RED "Entrée invalide.\n" RESET);
+        printf(RED "Entree invalide.\n" RESET);
         wait_for_enter();
         return;
     }
@@ -377,15 +377,15 @@ void select_algorithm_interactive(void) {
     switch (algo) {
         case 1:
             current_policy = &FIFO_POLICY;
-            printf(GREEN "FIFO sélectionné.\n" RESET);
+            printf(GREEN "FIFO selectionne.\n" RESET);
             break;
         case 2:
             current_policy = &SJF_POLICY;
-            printf(GREEN "SJF sélectionné.\n" RESET);
+            printf(GREEN "SJF selectionne.\n" RESET);
             break;
         case 3:
             current_policy = &SRJF_POLICY;
-            printf(GREEN "SRJF sélectionné.\n" RESET);
+            printf(GREEN "SRJF selectionne.\n" RESET);
             break;
         case 4: {
             int quantum;
@@ -393,10 +393,10 @@ void select_algorithm_interactive(void) {
             if (scanf("%d", &quantum) != 1 || quantum <= 0) {
                 flush_stdin();
                 quantum = 2;
-                printf(RED "Quantum invalide, 2 ms par défaut.\n" RESET);
+                printf(RED "Quantum invalide, 2 ms par defaut.\n" RESET);
             }
             flush_stdin();
-            /* Variable statique pour conserver la politique personnalisée */
+            /* Variable statique pour conserver la politique personnalisee */
             static SchedPolicy rr_custom;
             rr_custom = RR_POLICY;
             rr_custom.quantum = quantum;
@@ -419,20 +419,20 @@ void select_algorithm_interactive(void) {
 /**
  * @brief Lance la simulation avec les processus et l'algorithme courants.
  * 
- * Vérifie qu'un jeu de processus et une politique sont sélectionnés,
- * appelle simulate(), puis affiche un résumé des métriques.
+ * Verifie qu'un jeu de processus et une politique sont selectionnes,
+ * appelle simulate(), puis affiche un resume des metriques.
  */
 void run_simulation_interactive(void) {
     clear_screen();
     print_header("SIMULATION");
 
     if (loaded_processes == NULL) {
-        printf(RED "Aucun processus chargé.\n" RESET);
+        printf(RED "Aucun processus charge.\n" RESET);
         wait_for_enter();
         return;
     }
     if (current_policy == NULL) {
-        printf(RED "Aucun algorithme sélectionné.\n" RESET);
+        printf(RED "Aucun algorithme selectionne.\n" RESET);
         wait_for_enter();
         return;
     }
@@ -441,19 +441,19 @@ void run_simulation_interactive(void) {
     ScheduleResult result;
     simulate(loaded_processes, process_count, current_policy, &result);
 
-    printf("\n" BOLD CYAN "Résumé :\n" RESET);
+    printf("\n" BOLD CYAN "Resume :\n" RESET);
     printf("Temps d'attente moyen : %.2f ms\n", result.avg_wait_time);
     printf("Turnaround moyen      : %.2f ms\n", result.avg_turnaround_time);
-    printf("Temps de réponse moyen: %.2f ms\n", result.avg_response_time);
+    printf("Temps de reponse moyen: %.2f ms\n", result.avg_response_time);
     printf("Utilisation CPU       : %.2f %%\n", result.cpu_utilization);
     wait_for_enter();
 }
 
 /**
- * @brief Exporte les résultats de la simulation dans des fichiers CSV.
+ * @brief Exporte les resultats de la simulation dans des fichiers CSV.
  * 
- * Crée le dossier results/ (si nécessaire), lance la simulation,
- * puis exporte les métriques (results_*.csv) et la timeline (timeline_*.csv).
+ * Cree le dossier results/ (si necessaire), lance la simulation,
+ * puis exporte les metriques (results_*.csv) et la timeline (timeline_*.csv).
  */
 void export_results_interactive(void) {
     clear_screen();
@@ -469,14 +469,14 @@ void export_results_interactive(void) {
     ScheduleResult result;
     simulate(loaded_processes, process_count, current_policy, &result);
 
-    printf(GREEN "\nFichiers exportés :\n");
+    printf(GREEN "\nFichiers exportes :\n");
     printf("  results/results_%s.csv\n", current_policy->name);
     printf("  results/timeline_%s.csv\n" RESET, current_policy->name);
     wait_for_enter();
 }
 
 /**
- * @brief Génère et affiche les graphiques via le script Python matplotlib.
+ * @brief Genere et affiche les graphiques via le script Python matplotlib.
  * 
  * Lance la simulation pour produire les CSV, puis appelle plot_gantt.py
  * avec l'option --show pour afficher les quatre graphiques.
@@ -488,32 +488,32 @@ void visualize_with_matplotlib(void) {
         return;
     }
 
-    /* Génération des CSV par la simulation */
+    /* Generation des CSV par la simulation */
     ScheduleResult result;
     simulate(loaded_processes, process_count, current_policy, &result);
 
     /* Appel du script Python */
     char cmd[512];
     snprintf(cmd, sizeof(cmd), "python plot_gantt.py \"%s\" --show", current_policy->name);
-    printf("\nExécution de : %s\n", cmd);
+    printf("\nExecution de : %s\n", cmd);
     int ret = system(cmd);
     if (ret != 0) {
-        printf(RED "Erreur lors de l'exécution du script Python.\n" RESET);
-        printf(YELLOW "Vérifiez que Python et les bibliothèques (matplotlib, pandas) sont installés.\n" RESET);
+        printf(RED "Erreur lors de l'execution du script Python.\n" RESET);
+        printf(YELLOW "Verifiez que Python et les bibliotheques (matplotlib, pandas) sont installes.\n" RESET);
         printf(YELLOW "   pip install matplotlib pandas\n" RESET);
     } else {
-        printf(GREEN "Tous les graphiques ont été générés dans le dossier results/\n" RESET);
+        printf(GREEN "Tous les graphiques ont ete generes dans le dossier results/\n" RESET);
     }
     wait_for_enter();
 }
 
 /**
- * @brief Attend que l'utilisateur appuie sur Entrée.
+ * @brief Attend que l'utilisateur appuie sur Entree.
  * 
- * Affiche un message puis vide le tampon d'entrée.
+ * Affiche un message puis vide le tampon d'entree.
  */
 void wait_for_enter(void) {
-    printf("\n" BOLD "Appuyez sur Entrée pour continuer..." RESET);
+    printf("\n" BOLD "Appuyez sur Entree pour continuer..." RESET);
     flush_stdin();
 }
 
@@ -528,7 +528,7 @@ void run_simulation_from_args(const char *filename, const char *algo, const char
     }
     loaded_processes = procs;  // stockage global (utile pour simulate)
 
-    // Déterminer la politique
+    // Determiner la politique
     SchedPolicy *policy = NULL;
     if (strcmp(algo, "fifo") == 0 || strcmp(algo, "FIFO") == 0)
         policy = &FIFO_POLICY;
@@ -547,12 +547,12 @@ void run_simulation_from_args(const char *filename, const char *algo, const char
     ScheduleResult result;
     simulate(loaded_processes, process_count, policy, &result);
 
-    // Si un nom de fichier CSV est fourni, écrire les résultats dedans
+    // Si un nom de fichier CSV est fourni, ecrire les resultats dedans
     if (csv_output) {
         export_to_csv(csv_output, &result, loaded_processes, process_count);
     }
 
-    // Libération
+    // Liberation
     free_processes(loaded_processes, process_count);
     loaded_processes = NULL;
     process_count = 0;
