@@ -1,13 +1,21 @@
+/**
+ * @file main.c
+ * @brief Interface utilisateur interactive du simulateur d'ordonnancement
+ * @authors MISSAOUI Alissa (100%), TAKKA Kamelia (0%), HORNUNG Thomas (0%)
+ * @date 2026-04-02
+ * 
+ * Ce fichier contient le menu principal, la gestion des entrées utilisateur,
+ * le chargement des processus (fichier ou saisie manuelle), la sélection
+ * de l'algorithme, le lancement de la simulation, l'export CSV et l'appel
+ * au script Python de visualisation.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "scheduler.h"
 
-
-
-
-
-// Pour mkdir
+/* Inclusion pour la création de répertoire (mkdir) */
 #include <sys/stat.h>
 #ifdef _WIN32
 #include <direct.h>
@@ -16,13 +24,13 @@
 #define MKDIR(p) mkdir(p, 0755)
 #endif
 
-// Déclarations externes
+/* Déclarations externes des politiques d'ordonnancement (définies dans policies.c) */
 extern SchedPolicy FIFO_POLICY;
 extern SchedPolicy SJF_POLICY;
 extern SchedPolicy SRJF_POLICY;
 extern SchedPolicy RR_POLICY;
 
-// Couleurs ANSI
+/* Codes ANSI pour la coloration dans le terminal */
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -32,17 +40,17 @@ extern SchedPolicy RR_POLICY;
 #define CYAN    "\033[36m"
 #define BOLD    "\033[1m"
 
-// Variables globales
-static Process *loaded_processes = NULL;
-static int process_count = 0;
-static SchedPolicy *current_policy = NULL;
+/* Variables globales (état de la session) */
+static Process *loaded_processes = NULL;   /**< Tableau des processus chargés */
+static int process_count = 0;              /**< Nombre de processus chargés */
+static SchedPolicy *current_policy = NULL; /**< Politique d'ordonnancement sélectionnée */
 
-// Prototypes
+/* Prototypes des fonctions internes (définies plus bas) */
 void clear_screen(void);
 void print_header(const char *title);
 void print_menu(void);
 void load_processes_interactive(void);
-void load_processes_manual(void);          // nouvelle fonction
+void load_processes_manual(void);
 void select_algorithm_interactive(void);
 void run_simulation_interactive(void);
 void export_results_interactive(void);
@@ -50,6 +58,18 @@ void visualize_with_matplotlib(void);
 void wait_for_enter(void);
 void flush_stdin(void);
 
+/* ========================================================================
+ * Point d'entrée principal
+ * ======================================================================== */
+
+/**
+ * @brief Programme principal – boucle interactive du menu.
+ * 
+ * Initialise l'interface, puis répète l'affichage du menu et le traitement
+ * du choix utilisateur jusqu'à la sélection de l'option Quitter (7).
+ * 
+ * @return int Code de retour (0 = succès).
+ */
 int main(void) {
     clear_screen();
     print_header("SIMULATEUR D'ORDONNANCEMENT DE PROCESSUS");
@@ -67,7 +87,7 @@ int main(void) {
 
         switch (choice) {
             case 1: load_processes_interactive(); break;
-            case 2: load_processes_manual(); break;            // saisie manuelle
+            case 2: load_processes_manual(); break;
             case 3: select_algorithm_interactive(); break;
             case 4: run_simulation_interactive(); break;
             case 5: export_results_interactive(); break;
@@ -79,6 +99,7 @@ int main(void) {
         }
     } while (choice != 7);
 
+    /* Libération de la mémoire avant de quitter */
     if (loaded_processes != NULL) {
         free_processes(loaded_processes, process_count);
         loaded_processes = NULL;
@@ -86,22 +107,41 @@ int main(void) {
     return 0;
 }
 
-// --- Fonctions utilitaires ---
+/* ========================================================================
+ * Fonctions utilitaires (entrée/sortie, affichage)
+ * ======================================================================== */
+
+/**
+ * @brief Vide le tampon d'entrée standard (supprime les caractères résiduels).
+ * 
+ * Utilisé après scanf pour éviter qu'un '\n' restant ne perturbe la saisie suivante.
+ */
 void flush_stdin(void) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
+/**
+ * @brief Efface l'écran du terminal (commande ANSI).
+ */
 void clear_screen(void) {
     printf("\033[2J\033[1;1H");
 }
 
+/**
+ * @brief Affiche un en-tête encadré en couleur.
+ * 
+ * @param title Texte à afficher au centre de l'en-tête.
+ */
 void print_header(const char *title) {
     printf(BOLD CYAN "+------------------------------------------------------------+\n");
     printf("|  %-50s  |\n", title);
     printf("+------------------------------------------------------------+\n\n" RESET);
 }
 
+/**
+ * @brief Affiche le menu principal avec les options colorées.
+ */
 void print_menu(void) {
     printf(BOLD "MENU PRINCIPAL\n" RESET);
     printf("1. " GREEN "Charger un fichier de processus\n" RESET);
@@ -113,7 +153,16 @@ void print_menu(void) {
     printf("7. " RED "Quitter\n" RESET);
 }
 
-// --- Chargement depuis fichier ---
+/* ========================================================================
+ * Chargement des processus
+ * ======================================================================== */
+
+/**
+ * @brief Charge des processus à partir d'un fichier texte.
+ * 
+ * Demande le chemin du fichier, appelle read_processes_from_file(),
+ * puis affiche la liste des processus chargés.
+ */
 void load_processes_interactive(void) {
     clear_screen();
     print_header("CHARGEMENT DES PROCESSUS (FICHIER)");
@@ -127,6 +176,7 @@ void load_processes_interactive(void) {
     }
     filename[strcspn(filename, "\n")] = '\0';
 
+    /* Libération de l'ancien jeu de processus s'il existe */
     if (loaded_processes != NULL) {
         free_processes(loaded_processes, process_count);
         loaded_processes = NULL;
@@ -153,7 +203,16 @@ void load_processes_interactive(void) {
     wait_for_enter();
 }
 
-// --- Saisie manuelle des processus ---
+/**
+ * @brief Saisie interactive manuelle des processus.
+ * 
+ * L'utilisateur entre le nombre de processus, puis pour chacun :
+ *   - temps d'arrivée
+ *   - nombre de bursts CPU
+ *   - pour chaque burst : durée CPU, puis durée E/S (sauf après le dernier burst)
+ * 
+ * Les processus sont stockés dans la variable globale loaded_processes.
+ */
 void load_processes_manual(void) {
     clear_screen();
     print_header("SAISIE MANUELLE DES PROCESSUS");
@@ -178,6 +237,7 @@ void load_processes_manual(void) {
     for (int i = 0; i < n; i++) {
         printf("\n--- Processus %d ---\n", i+1);
         proc[i].pid = i+1;
+        
         printf("Temps d'arrivée (ms) : ");
         if (scanf("%d", &proc[i].arrival_time) != 1) {
             flush_stdin();
@@ -200,6 +260,7 @@ void load_processes_manual(void) {
         flush_stdin();
         proc[i].num_bursts = nb;
 
+        /* Allocation des tableaux CPU bursts et IO bursts */
         proc[i].cpu_bursts = malloc(nb * sizeof(int));
         proc[i].io_bursts = malloc((nb - 1) * sizeof(int));
         if (!proc[i].cpu_bursts || (nb > 1 && !proc[i].io_bursts)) {
@@ -223,6 +284,7 @@ void load_processes_manual(void) {
                 return;
             }
             flush_stdin();
+            
             if (j < nb - 1) {
                 printf("  Durée de l'E/S après ce burst : ");
                 if (scanf("%d", &proc[i].io_bursts[j]) != 1 || proc[i].io_bursts[j] <= 0) {
@@ -238,7 +300,7 @@ void load_processes_manual(void) {
             }
         }
 
-        // Initialisation des champs internes
+        /* Initialisation des champs dynamiques (état, temps restant, ...) */
         proc[i].current_burst_index = 0;
         proc[i].remaining_burst = proc[i].cpu_bursts[0];
         proc[i].total_wait_time = 0;
@@ -247,7 +309,7 @@ void load_processes_manual(void) {
         proc[i].state = NEW;
     }
 
-    // Libération de l'ancien jeu de processus
+    /* Remplacement de l'ancien jeu de processus */
     if (loaded_processes != NULL) {
         free_processes(loaded_processes, process_count);
         loaded_processes = NULL;
@@ -273,9 +335,16 @@ void load_processes_manual(void) {
     wait_for_enter();
 }
 
-// --- Les autres fonctions (choix algorithme, simulation, export, visualisation) ---
-// (Elles restent inchangées, je les recopie pour mémoire)
+/* ========================================================================
+ * Sélection de l'algorithme
+ * ======================================================================== */
 
+/**
+ * @brief Menu interactif pour choisir l'algorithme d'ordonnancement.
+ * 
+ * Propose FIFO, SJF, SRJF et Round Robin (avec quantum personnalisable).
+ * Met à jour la variable globale current_policy.
+ */
 void select_algorithm_interactive(void) {
     clear_screen();
     print_header("CHOIX DE L'ALGORITHME");
@@ -296,9 +365,18 @@ void select_algorithm_interactive(void) {
     flush_stdin();
 
     switch (algo) {
-        case 1: current_policy = &FIFO_POLICY; printf(GREEN "FIFO sélectionné.\n" RESET); break;
-        case 2: current_policy = &SJF_POLICY; printf(GREEN "SJF sélectionné.\n" RESET); break;
-        case 3: current_policy = &SRJF_POLICY; printf(GREEN "SRJF sélectionné.\n" RESET); break;
+        case 1:
+            current_policy = &FIFO_POLICY;
+            printf(GREEN "FIFO sélectionné.\n" RESET);
+            break;
+        case 2:
+            current_policy = &SJF_POLICY;
+            printf(GREEN "SJF sélectionné.\n" RESET);
+            break;
+        case 3:
+            current_policy = &SRJF_POLICY;
+            printf(GREEN "SRJF sélectionné.\n" RESET);
+            break;
         case 4: {
             int quantum;
             printf("Entrez le quantum (ms) : ");
@@ -308,6 +386,7 @@ void select_algorithm_interactive(void) {
                 printf(RED "Quantum invalide, 2 ms par défaut.\n" RESET);
             }
             flush_stdin();
+            /* Variable statique pour conserver la politique personnalisée */
             static SchedPolicy rr_custom;
             rr_custom = RR_POLICY;
             rr_custom.quantum = quantum;
@@ -323,6 +402,16 @@ void select_algorithm_interactive(void) {
     wait_for_enter();
 }
 
+/* ========================================================================
+ * Simulation et export
+ * ======================================================================== */
+
+/**
+ * @brief Lance la simulation avec les processus et l'algorithme courants.
+ * 
+ * Vérifie qu'un jeu de processus et une politique sont sélectionnés,
+ * appelle simulate(), puis affiche un résumé des métriques.
+ */
 void run_simulation_interactive(void) {
     clear_screen();
     print_header("SIMULATION");
@@ -350,6 +439,12 @@ void run_simulation_interactive(void) {
     wait_for_enter();
 }
 
+/**
+ * @brief Exporte les résultats de la simulation dans des fichiers CSV.
+ * 
+ * Crée le dossier results/ (si nécessaire), lance la simulation,
+ * puis exporte les métriques (results_*.csv) et la timeline (timeline_*.csv).
+ */
 void export_results_interactive(void) {
     clear_screen();
     print_header("EXPORT CSV");
@@ -370,6 +465,12 @@ void export_results_interactive(void) {
     wait_for_enter();
 }
 
+/**
+ * @brief Génère et affiche les graphiques via le script Python matplotlib.
+ * 
+ * Lance la simulation pour produire les CSV, puis appelle plot_gantt.py
+ * avec l'option --show pour afficher les quatre graphiques.
+ */
 void visualize_with_matplotlib(void) {
     if (loaded_processes == NULL || current_policy == NULL) {
         printf(RED "Veuillez d'abord charger des processus et choisir un algorithme.\n" RESET);
@@ -377,11 +478,11 @@ void visualize_with_matplotlib(void) {
         return;
     }
 
-    // Lancer la simulation pour générer les CSV
+    /* Génération des CSV par la simulation */
     ScheduleResult result;
     simulate(loaded_processes, process_count, current_policy, &result);
 
-    // Appeler le script Python unifié
+    /* Appel du script Python */
     char cmd[512];
     snprintf(cmd, sizeof(cmd), "python plot_gantt.py \"%s\" --show", current_policy->name);
     printf("\nExécution de : %s\n", cmd);
@@ -396,6 +497,11 @@ void visualize_with_matplotlib(void) {
     wait_for_enter();
 }
 
+/**
+ * @brief Attend que l'utilisateur appuie sur Entrée.
+ * 
+ * Affiche un message puis vide le tampon d'entrée.
+ */
 void wait_for_enter(void) {
     printf("\n" BOLD "Appuyez sur Entrée pour continuer..." RESET);
     flush_stdin();

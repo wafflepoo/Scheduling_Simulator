@@ -91,6 +91,9 @@ $(function(){initNavTree('scheduler_8h.html','',''); });
   <div class="headertitle"><div class="title">scheduler.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Définitions des structures, énumérations et prototypes du simulateur.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;limits.h&gt;</code><br />
 </div>
@@ -99,8 +102,11 @@ $(function(){initNavTree('scheduler_8h.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:Process" id="r_Process"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_process.html">Process</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant un processus.  <a href="struct_process.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ScheduleResult" id="r_ScheduleResult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_schedule_result.html">ScheduleResult</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure regroupant les résultats agrégés de la simulation.  <a href="struct_schedule_result.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SchedPolicy" id="r_SchedPolicy"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_sched_policy.html">SchedPolicy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure décrivant une politique d'ordonnancement.  <a href="struct_sched_policy.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -113,27 +119,53 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="#a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5">TERMINATED</a>
 <br />
  }</td></tr>
+<tr class="memdesc:a373a58178f69d5e3e1de7516d105675e"><td class="mdescLeft">&#160;</td><td class="mdescRight">États possibles d'un processus au cours de la simulation.  <a href="#a373a58178f69d5e3e1de7516d105675e">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a089da8895e9d26369beae5ca55afc066" id="r_a089da8895e9d26369beae5ca55afc066"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a089da8895e9d26369beae5ca55afc066">fifo_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memdesc:a089da8895e9d26369beae5ca55afc066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sélectionne le prochain processus à exécuter selon l'algorithme FIFO.  <br /></td></tr>
 <tr class="memitem:a155128ba20be40bfc6591590cbf70afb" id="r_a155128ba20be40bfc6591590cbf70afb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a155128ba20be40bfc6591590cbf70afb">sjf_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memdesc:a155128ba20be40bfc6591590cbf70afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sélectionne le processus avec le plus petit prochain burst CPU.  <br /></td></tr>
 <tr class="memitem:a516f8087f67a4b27ae4500c112380e69" id="r_a516f8087f67a4b27ae4500c112380e69"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a516f8087f67a4b27ae4500c112380e69">sjrf_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memdesc:a516f8087f67a4b27ae4500c112380e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sélectionne le processus avec le plus petit temps restant (remaining_burst).  <br /></td></tr>
 <tr class="memitem:ae9c8f637eb0293d4911549ce10a7c9c2" id="r_ae9c8f637eb0293d4911549ce10a7c9c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae9c8f637eb0293d4911549ce10a7c9c2">rr_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memdesc:ae9c8f637eb0293d4911549ce10a7c9c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sélectionne le prochain processus pour l'algorithme Round Robin.  <br /></td></tr>
 <tr class="memitem:abae1dab215146d14e2d5987580b8d4d8" id="r_abae1dab215146d14e2d5987580b8d4d8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abae1dab215146d14e2d5987580b8d4d8">simulate</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count, <a class="el" href="struct_sched_policy.html">SchedPolicy</a> *policy, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result)</td></tr>
+<tr class="memdesc:abae1dab215146d14e2d5987580b8d4d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lance la simulation avec une politique donnée.  <br /></td></tr>
 <tr class="memitem:a32e5d694e6ae54f7e721ad25377df580" id="r_a32e5d694e6ae54f7e721ad25377df580"><td class="memItemLeft"><a class="el" href="struct_process.html">Process</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a32e5d694e6ae54f7e721ad25377df580">read_processes_from_file</a> (const char *filename, int *count)</td></tr>
+<tr class="memdesc:a32e5d694e6ae54f7e721ad25377df580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit un fichier texte et construit un tableau de processus.  <br /></td></tr>
 <tr class="memitem:afe34469cb1544e2260bf852265474560" id="r_afe34469cb1544e2260bf852265474560"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afe34469cb1544e2260bf852265474560">export_to_csv</a> (const char *filename, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result, <a class="el" href="struct_process.html">Process</a> *processes, int count)</td></tr>
+<tr class="memdesc:afe34469cb1544e2260bf852265474560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exporte les résultats dans un fichier CSV.  <br /></td></tr>
 <tr class="memitem:a4580d3df1a5af54c1425341d751b0352" id="r_a4580d3df1a5af54c1425341d751b0352"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4580d3df1a5af54c1425341d751b0352">free_processes</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count)</td></tr>
+<tr class="memdesc:a4580d3df1a5af54c1425341d751b0352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la mémoire allouée pour un tableau de processus.  <br /></td></tr>
 <tr class="memitem:ae7f85692203c4834e7e46b0b6eae5eea" id="r_ae7f85692203c4834e7e46b0b6eae5eea"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae7f85692203c4834e7e46b0b6eae5eea">export_timeline_csv</a> (const char *filename, char **timeline, int count, int max_time)</td></tr>
+<tr class="memdesc:ae7f85692203c4834e7e46b0b6eae5eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exporte la timeline (états par processus et par ms) dans un fichier CSV.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a47714f4531b3c5ffc14373ec077f4bb1" id="r_a47714f4531b3c5ffc14373ec077f4bb1"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a47714f4531b3c5ffc14373ec077f4bb1">FIFO_POLICY</a></td></tr>
+<tr class="memdesc:a47714f4531b3c5ffc14373ec077f4bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Politique FIFO (First In, First Out) – non préemptive.  <br /></td></tr>
 <tr class="memitem:acc7aef29eca7371069e006f35f507b78" id="r_acc7aef29eca7371069e006f35f507b78"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#acc7aef29eca7371069e006f35f507b78">SJF_POLICY</a></td></tr>
+<tr class="memdesc:acc7aef29eca7371069e006f35f507b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Politique SJF (Shortest Job First) – non préemptive.  <br /></td></tr>
 <tr class="memitem:a4e50bf55e879dd927f18f808b95fcd36" id="r_a4e50bf55e879dd927f18f808b95fcd36"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4e50bf55e879dd927f18f808b95fcd36">SRJF_POLICY</a></td></tr>
+<tr class="memdesc:a4e50bf55e879dd927f18f808b95fcd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Politique SRJF (Shortest Remaining Job First) – préemptive.  <br /></td></tr>
 <tr class="memitem:a588668f5ff0f5ed85837a722b1176bb4" id="r_a588668f5ff0f5ed85837a722b1176bb4"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a588668f5ff0f5ed85837a722b1176bb4">RR_POLICY</a></td></tr>
+<tr class="memdesc:a588668f5ff0f5ed85837a722b1176bb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Politique Round Robin – préemptive avec quantum fixe.  <br /></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Définitions des structures, énumérations et prototypes du simulateur. </p>
+<dl class="section author"><dt>Authors</dt><dd>MISSAOUI Alissa (40%), TAKKA Kamelia (30%), HORNUNG Thomas (30%) </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2026-04-02</dd></dl>
+<p>Ce fichier d'en-tête contient toutes les déclarations communes au simulateur d'ordonnancement de processus. Il définit :</p><ul>
+<li>Les états d'un processus (enum <a class="el" href="#a373a58178f69d5e3e1de7516d105675e" title="États possibles d&#39;un processus au cours de la simulation.">ProcessState</a>)</li>
+<li>La structure <a class="el" href="struct_process.html" title="Structure représentant un processus.">Process</a> (description d'un processus)</li>
+<li>La structure <a class="el" href="struct_schedule_result.html" title="Structure regroupant les résultats agrégés de la simulation.">ScheduleResult</a> (résultats de simulation)</li>
+<li>La structure <a class="el" href="struct_sched_policy.html" title="Structure décrivant une politique d&#39;ordonnancement.">SchedPolicy</a> (politique d'ordonnancement)</li>
+<li>Les prototypes des fonctions de sélection et du simulateur</li>
+<li>Les prototypes des fonctions utilitaires </li>
+</ul>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
 <a id="a373a58178f69d5e3e1de7516d105675e" name="a373a58178f69d5e3e1de7516d105675e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a373a58178f69d5e3e1de7516d105675e">&#9670;&#160;</a></span>ProcessState</h2>
 
@@ -145,12 +177,19 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>États possibles d'un processus au cours de la simulation. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675eaec34b0b90541576a22697631105dc847" name="a373a58178f69d5e3e1de7516d105675eaec34b0b90541576a22697631105dc847"></a>NEW&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea6564f2f3e15be06b670547bbcaaf0798" name="a373a58178f69d5e3e1de7516d105675ea6564f2f3e15be06b670547bbcaaf0798"></a>READY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304" name="a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304"></a>RUNNING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea757971c0bc5a1972d5f1b1be2c0e2087" name="a373a58178f69d5e3e1de7516d105675ea757971c0bc5a1972d5f1b1be2c0e2087"></a>WAITING&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5" name="a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5"></a>TERMINATED&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675eaec34b0b90541576a22697631105dc847" name="a373a58178f69d5e3e1de7516d105675eaec34b0b90541576a22697631105dc847"></a>NEW&#160;</td><td class="fielddoc"><p>Processus nouvellement créé, pas encore dans la file READY </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea6564f2f3e15be06b670547bbcaaf0798" name="a373a58178f69d5e3e1de7516d105675ea6564f2f3e15be06b670547bbcaaf0798"></a>READY&#160;</td><td class="fielddoc"><p>Processus prêt à être exécuté (dans la file d'attente) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304" name="a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304"></a>RUNNING&#160;</td><td class="fielddoc"><p>Processus en cours d'exécution sur le CPU </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea757971c0bc5a1972d5f1b1be2c0e2087" name="a373a58178f69d5e3e1de7516d105675ea757971c0bc5a1972d5f1b1be2c0e2087"></a>WAITING&#160;</td><td class="fielddoc"><p>Processus en attente d'une opération d'E/S </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5" name="a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5"></a>TERMINATED&#160;</td><td class="fielddoc"><p>Processus terminé </p>
+</td></tr>
 </table>
 
 </div>
@@ -185,6 +224,27 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Exporte la timeline (états par processus et par ms) dans un fichier CSV. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Nom du fichier de sortie. </td></tr>
+    <tr><td class="paramname">timeline</td><td>Tableau 2D des états (count lignes, max_time colonnes). </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus. </td></tr>
+    <tr><td class="paramname">max_time</td><td>Nombre de colonnes (durée simulée).</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Exporte la timeline (états par processus et par ms) dans un fichier CSV.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Nom du fichier de sortie. </td></tr>
+    <tr><td class="paramname">timeline</td><td>Tableau 2D des états (count lignes, max_time colonnes). </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus. </td></tr>
+    <tr><td class="paramname">max_time</td><td>Durée totale simulée (nombre de colonnes). </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="afe34469cb1544e2260bf852265474560" name="afe34469cb1544e2260bf852265474560"></a>
@@ -215,6 +275,33 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Exporte les résultats dans un fichier CSV. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Nom du fichier de sortie. </td></tr>
+    <tr><td class="paramname">result</td><td>Structure contenant les moyennes et l'utilisation CPU. </td></tr>
+    <tr><td class="paramname">processes</td><td>Tableau des processus (après simulation). </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Exporte les résultats dans un fichier CSV.</p>
+<p>Le fichier généré contient :</p><ul>
+<li>Une ligne d'en-tête : PID, Response Time, Wait Time, Turnaround Time</li>
+<li>Une ligne par processus avec ses métriques individuelles</li>
+<li>Une ligne commentée (#Moyennes) avec les moyennes des métriques</li>
+<li>Une ligne commentée (#CPU Utilization) avec le taux d'occupation CPU</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Chemin du fichier CSV à créer. </td></tr>
+    <tr><td class="paramname">result</td><td>Structure contenant les moyennes et l'utilisation CPU. </td></tr>
+    <tr><td class="paramname">processes</td><td>Tableau des processus (après simulation). </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -247,6 +334,19 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sélectionne le prochain processus à exécuter selon l'algorithme FIFO. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ready</td><td>Tableau de pointeurs vers les processus prêts. </td></tr>
+    <tr><td class="paramname">n</td><td>Nombre de processus dans la file (inutilisé). </td></tr>
+    <tr><td class="paramname">quantum</td><td>Quantum de temps (inutilisé pour FIFO). </td></tr>
+    <tr><td class="paramname">current_time</td><td>Temps courant (inutilisé). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Toujours 0 (indice du premier élément du tableau).</dd></dl>
+<p>L'algorithme FIFO se contente de prendre le processus arrivé le plus tôt, c'est-à-dire le premier élément du tableau <span class="tt">ready</span> (qui est maintenu dans l'ordre d'arrivée par le simulateur). </p>
+
 </div>
 </div>
 <a id="a4580d3df1a5af54c1425341d751b0352" name="a4580d3df1a5af54c1425341d751b0352"></a>
@@ -268,6 +368,24 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Libère la mémoire allouée pour un tableau de processus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">processes</td><td>Tableau de processus. </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Libère la mémoire allouée pour un tableau de processus.</p>
+<p>Pour chaque processus, libère les tableaux cpu_bursts et io_bursts, puis libère le tableau de processus lui-même.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">processes</td><td>Tableau de processus à libérer. </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus dans le tableau. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a32e5d694e6ae54f7e721ad25377df580" name="a32e5d694e6ae54f7e721ad25377df580"></a>
@@ -288,6 +406,28 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Lit un fichier texte et construit un tableau de processus. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Chemin du fichier. </td></tr>
+    <tr><td class="paramname">count</td><td>Pointeur vers un entier qui recevra le nombre de processus. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Process* Tableau alloué dynamiquement (NULL en cas d'erreur).</dd></dl>
+<p>Le fichier doit contenir une ligne par processus. Les champs sont : PID, temps_arrivee, puis une alternance de durées CPU et de durées E/S. Exemple : 1 0 5 2 3 (PID=1, arrive à 0, CPU=5, E/S=2, CPU=3)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Chemin du fichier à lire. </td></tr>
+    <tr><td class="paramname">count</td><td>Pointeur vers un entier qui recevra le nombre de processus lus. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Process* Tableau alloué dynamiquement (à libérer avec <a class="el" href="utils_8c.html#a4580d3df1a5af54c1425341d751b0352" title="Libère la mémoire allouée dynamiquement pour un tableau de processus.">free_processes()</a>), ou NULL en cas d'erreur.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Les processus sont triés par temps d'arrivée après lecture. </dd>
+<dd>
+Les champs internes (remaining_burst, response_time, etc.) sont initialisés. </dd></dl>
 
 </div>
 </div>
@@ -320,6 +460,19 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sélectionne le prochain processus pour l'algorithme Round Robin. </p>
+<p>Round Robin utilise un ordre circulaire : le processus suivant est toujours le premier de la file d'attente. La préemption par quantum est gérée par la boucle principale de simulation (<a class="el" href="simulator_8c.html" title="Cœur du simulateur d&#39;ordonnancement : boucle événementielle et gestion des files.">simulator.c</a>), pas par cette fonction.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ready</td><td>Tableau de pointeurs vers les processus prêts. </td></tr>
+    <tr><td class="paramname">n</td><td>Nombre de processus dans la file (inutilisé). </td></tr>
+    <tr><td class="paramname">quantum</td><td>Quantum de temps (inutilisé ici, géré ailleurs). </td></tr>
+    <tr><td class="paramname">current_time</td><td>Temps courant (inutilisé). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Toujours 0 (indice du premier élément du tableau). </dd></dl>
+
 </div>
 </div>
 <a id="abae1dab215146d14e2d5987580b8d4d8" name="abae1dab215146d14e2d5987580b8d4d8"></a>
@@ -350,6 +503,34 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Lance la simulation avec une politique donnée. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">processes</td><td>Tableau des processus (non modifié). </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus. </td></tr>
+    <tr><td class="paramname">policy</td><td>Politique d'ordonnancement à utiliser. </td></tr>
+    <tr><td class="paramname">result</td><td>Structure qui recevra les métriques de performance.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Lance la simulation avec une politique donnée.</p>
+<p>Cette fonction implémente un moteur à événements discrets. Elle gère :</p><ul>
+<li>Les arrivées de nouveaux processus (ajout dans la file READY)</li>
+<li>Les fins de burst CPU (passage à l'E/S ou terminaison)</li>
+<li>Les fins d'E/S (réinsertion dans la file READY)</li>
+<li>Les fins de quantum (Round Robin)</li>
+<li>La préemption SRJF (comparaison des remaining_burst)</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">processes</td><td>Tableau original des processus (non modifié). </td></tr>
+    <tr><td class="paramname">count</td><td>Nombre de processus. </td></tr>
+    <tr><td class="paramname">policy</td><td>Politique d'ordonnancement (FIFO, SJF, SRJF, RR). </td></tr>
+    <tr><td class="paramname">result</td><td>Structure qui recevra les métriques de performance. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -382,6 +563,19 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sélectionne le processus avec le plus petit prochain burst CPU. </p>
+<p>Parcourt la file des processus prêts et compare la durée du burst CPU courant (cpu_bursts[current_burst_index]) pour chaque processus.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ready</td><td>Tableau de pointeurs vers les processus prêts. </td></tr>
+    <tr><td class="paramname">n</td><td>Nombre de processus dans la file. </td></tr>
+    <tr><td class="paramname">quantum</td><td>Quantum de temps (inutilisé pour SJF). </td></tr>
+    <tr><td class="paramname">current_time</td><td>Temps courant (inutilisé). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Indice (dans ready) du processus ayant le plus petit burst. </dd></dl>
+
 </div>
 </div>
 <a id="a516f8087f67a4b27ae4500c112380e69" name="a516f8087f67a4b27ae4500c112380e69"></a>
@@ -413,6 +607,19 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sélectionne le processus avec le plus petit temps restant (remaining_burst). </p>
+<p>Parcourt la file des processus prêts et compare leur remaining_burst. Cette fonction est appelée par le simulateur pour déterminer quel processus devrait être exécuté en priorité. La préemption effective est gérée dans la boucle principale de <a class="el" href="simulator_8c.html#abae1dab215146d14e2d5987580b8d4d8" title="Lance la simulation d&#39;ordonnancement pour une politique donnée.">simulate()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ready</td><td>Tableau de pointeurs vers les processus prêts. </td></tr>
+    <tr><td class="paramname">n</td><td>Nombre de processus dans la file. </td></tr>
+    <tr><td class="paramname">quantum</td><td>Quantum de temps (inutilisé pour SRJF). </td></tr>
+    <tr><td class="paramname">current_time</td><td>Temps courant (inutilisé). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int Indice (dans ready) du processus ayant le plus petit remaining_burst. </dd></dl>
+
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
@@ -436,6 +643,10 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Politique FIFO (First In, First Out) – non préemptive. </p>
+<p>Politique First In, First Out</p>
+<p>La fonction de sélection <a class="el" href="fifo__select_8c.html#a089da8895e9d26369beae5ca55afc066" title="Sélectionne le prochain processus à exécuter selon l&#39;algorithme FIFO.">fifo_select()</a> retourne toujours l'indice 0, c'est-à-dire le premier processus de la file d'attente. Quantum = 0 (non utilisé). </p>
+
 </div>
 </div>
 <a id="a588668f5ff0f5ed85837a722b1176bb4" name="a588668f5ff0f5ed85837a722b1176bb4"></a>
@@ -457,6 +668,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Politique Round Robin – préemptive avec quantum fixe. </p>
+<p>Politique Round Robin (quantum = 2 par défaut)</p>
+<p>La fonction <a class="el" href="rr__select_8c.html#ae9c8f637eb0293d4911549ce10a7c9c2" title="Sélectionne le prochain processus pour l&#39;algorithme Round Robin.">rr_select()</a> retourne toujours 0 (file FIFO), mais la préemption est déclenchée par le quantum dans la boucle principale. Le quantum par défaut est de 2 ms (peut être modifié par l'utilisateur via une copie locale dans <a class="el" href="main_8c.html" title="Interface utilisateur interactive du simulateur d&#39;ordonnancement.">main.c</a>). </p>
 
 </div>
 </div>
@@ -480,6 +695,10 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Politique SJF (Shortest Job First) – non préemptive. </p>
+<p>Politique Shortest Job First (non préemptif)</p>
+<p>La fonction <a class="el" href="sjf__select_8c.html#a155128ba20be40bfc6591590cbf70afb" title="Sélectionne le processus avec le plus petit prochain burst CPU.">sjf_select()</a> choisit le processus ayant le prochain burst CPU le plus court (basé sur cpu_bursts[current_burst_index]). Quantum = 0 (non utilisé). </p>
+
 </div>
 </div>
 <a id="a4e50bf55e879dd927f18f808b95fcd36" name="a4e50bf55e879dd927f18f808b95fcd36"></a>
@@ -501,6 +720,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Politique SRJF (Shortest Remaining Job First) – préemptive. </p>
+<p>Politique Shortest Remaining Job First (préemptif)</p>
+<p>La fonction <a class="el" href="sjrf__select_8c.html#a516f8087f67a4b27ae4500c112380e69" title="Sélectionne le processus avec le plus petit temps restant (remaining_burst).">sjrf_select()</a> sélectionne le processus prêt ayant le remaining_burst (temps restant du burst courant) le plus petit. La préemption est gérée dans <a class="el" href="simulator_8c.html#abae1dab215146d14e2d5987580b8d4d8" title="Lance la simulation d&#39;ordonnancement pour une politique donnée.">simulate()</a>. Quantum = 0 (non utilisé). </p>
 
 </div>
 </div>

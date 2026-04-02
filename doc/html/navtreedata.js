@@ -49,9 +49,10 @@ var NAVTREE =
         [ "Fichiers CSV", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
         [ "Graphiques (Python)", "md__r_e_a_d_m_e.html#autotoc_md20", null ]
       ] ],
-      [ "Dépendances", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
-      [ "Auteurs", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
-      [ "Licence", "md__r_e_a_d_m_e.html#autotoc_md23", null ]
+      [ "Structure du projet", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
+      [ "Dépendances", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
+      [ "Auteurs", "md__r_e_a_d_m_e.html#autotoc_md23", null ],
+      [ "Licence", "md__r_e_a_d_m_e.html#autotoc_md24", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

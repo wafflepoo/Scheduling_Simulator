@@ -92,6 +92,9 @@ $(function(){initNavTree('struct_process.html','','struct_process-members'); });
 </div><!--header-->
 <div class="contents">
 
+<p>Structure représentant un processus.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="scheduler_8h_source.html">scheduler.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -110,7 +113,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a41397aca0c658312c03a8ede9550f701" id="r_a41397aca0c658312c03a8ede9550f701"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a41397aca0c658312c03a8ede9550f701">last_exec_time</a></td></tr>
 <tr class="memitem:a51874bc28aba2bd6f273df2955152472" id="r_a51874bc28aba2bd6f273df2955152472"><td class="memItemLeft"><a class="el" href="scheduler_8h.html#a373a58178f69d5e3e1de7516d105675e">ProcessState</a>&#160;</td><td class="memItemRight"><a class="el" href="#a51874bc28aba2bd6f273df2955152472">state</a></td></tr>
 </table>
-<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Structure représentant un processus. </p>
+<p>Contient toutes les informations statiques (PID, arrivée, bursts) et dynamiques (état, temps d'attente, temps restant, etc.). </p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a2401a791b3a001649003ed02cdc659af" name="a2401a791b3a001649003ed02cdc659af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2401a791b3a001649003ed02cdc659af">&#9670;&#160;</a></span>arrival_time</h2>
 
@@ -122,6 +128,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Temps d'arrivée dans le système (ms) </p>
 
 </div>
 </div>
@@ -136,6 +143,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Tableau des durées des bursts CPU (ms) </p>
 
 </div>
 </div>
@@ -150,6 +158,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Index du burst CPU en cours (0..num_bursts-1) </p>
 
 </div>
 </div>
@@ -164,6 +173,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Instant de terminaison du processus </p>
 
 </div>
 </div>
@@ -178,6 +188,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Tableau des durées des E/S (ms), taille = num_bursts - 1 </p>
 
 </div>
 </div>
@@ -192,6 +203,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Dernier instant d'exécution (non utilisé) </p>
 
 </div>
 </div>
@@ -206,6 +218,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Nombre de bursts CPU (et donc nombre de phases CPU) </p>
 
 </div>
 </div>
@@ -220,6 +233,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Identifiant unique du processus </p>
 
 </div>
 </div>
@@ -234,6 +248,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Temps restant à exécuter pour le burst CPU courant </p>
 
 </div>
 </div>
@@ -248,6 +263,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Délai entre arrival_time et premier accès CPU (ms) </p>
 
 </div>
 </div>
@@ -262,6 +278,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Instant de premier démarrage (non utilisé) </p>
 
 </div>
 </div>
@@ -276,6 +293,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>État courant du processus (NEW, READY, etc.) </p>
 
 </div>
 </div>
@@ -290,6 +308,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Temps total passé dans la file READY (ms) </p>
 
 </div>
 </div>

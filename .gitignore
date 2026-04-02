@@ -12,7 +12,7 @@
 /simulateur
 /simulateur.exe
 
-# Dossier de compilation (obj/) si vous l'utilisez
+# Dossier de compilation (obj/)
 /obj/
 /build/
 
@@ -30,17 +30,17 @@
 # Répertoire .vs/ (Visual Studio)
 .vs/
 
-# Répertoire .vscode/ (mais vous pouvez le versionner si vous voulez partager config)
+# Répertoire .vscode/
 .vscode/
-# Si vous voulez garder les paramètres d'espace de travail, commentez la ligne ci-dessus
+# Pour garder les paramètres d'espace de travail, commentez la ligne ci-dessus
 
-# Fichiers de configuration spécifiques à l'IDE (CodeBlocks, etc.)
+# Fichiers de configuration spécifiques à l'IDE 
 *.cbp
 *.depend
 *.layout
 *.workspace
 
-# Fichiers de projet Qt (si utilisés)
+# Fichiers de projet Qt 
 *.pro
 *.pro.user
 *.pri
@@ -67,14 +67,9 @@ TAGS
 
 # Fichiers de test générés (par exemple CSV produits par le programme)
 *.csv
-# Mais si vous voulez garder des exemples de CSV, mieux vaut les mettre dans un dossier spécifique et l'inclure.
 # Ici on ignore tous les CSV sauf s'ils sont dans un dossier tests/data/ par exemple.
-# On peut ajuster : 
-# tests/*.csv  (si on veut ignorer les CSV de tests)
 
-# Fichiers de données d'entrée (vous voulez peut-être versionner vos fichiers d'exemple)
-# Ne pas ignorer les fichiers .txt d'exemple si vous les mettez dans examples/ ou tests/
-# On garde donc *.txt sauf si ce sont des résultats.
+
 
 # Dossiers de sortie CSV créés par le programme
 /output/
