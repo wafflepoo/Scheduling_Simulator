@@ -70,7 +70,7 @@ La documentation HTML sera générée dans le dossier doc/.
 Lancez le programme :
 
 ```bash
-./scheduler
+./simulateur
 ```
 
 
