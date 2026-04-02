@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['bonus_20possibles_0',['Bonus possibles',['../md__r_e_a_d_m_e.html#autotoc_md16',1,'']]]
+  ['blue_0',['BLUE',['../main_8c.html#a79d10e672abb49ad63eeaa8aaef57c38',1,'main.c']]],
+  ['bold_1',['BOLD',['../main_8c.html#a26cdbb1a00213c810caccf21cd33a631',1,'main.c']]]
 ];

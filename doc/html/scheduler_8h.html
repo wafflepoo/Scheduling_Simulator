@@ -92,6 +92,7 @@ $(function(){initNavTree('scheduler_8h.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;limits.h&gt;</code><br />
 </div>
 <p><a href="scheduler_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -99,19 +100,93 @@ $(function(){initNavTree('scheduler_8h.html','',''); });
 Classes</h2></td></tr>
 <tr class="memitem:Process" id="r_Process"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_process.html">Process</a></td></tr>
 <tr class="memitem:ScheduleResult" id="r_ScheduleResult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_schedule_result.html">ScheduleResult</a></td></tr>
-<tr class="memitem:Scheduler" id="r_Scheduler"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_scheduler.html">Scheduler</a></td></tr>
+<tr class="memitem:SchedPolicy" id="r_SchedPolicy"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_sched_policy.html">SchedPolicy</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a373a58178f69d5e3e1de7516d105675e" id="r_a373a58178f69d5e3e1de7516d105675e"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a373a58178f69d5e3e1de7516d105675e">ProcessState</a> { <br />
+&#160;&#160;<a class="el" href="#a373a58178f69d5e3e1de7516d105675eaec34b0b90541576a22697631105dc847">NEW</a>
+, <a class="el" href="#a373a58178f69d5e3e1de7516d105675ea6564f2f3e15be06b670547bbcaaf0798">READY</a>
+, <a class="el" href="#a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304">RUNNING</a>
+, <a class="el" href="#a373a58178f69d5e3e1de7516d105675ea757971c0bc5a1972d5f1b1be2c0e2087">WAITING</a>
+, <br />
+&#160;&#160;<a class="el" href="#a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5">TERMINATED</a>
+<br />
+ }</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a76c326bd602a97334b00f7fa039125a0" id="r_a76c326bd602a97334b00f7fa039125a0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a76c326bd602a97334b00f7fa039125a0">fifo_schedule</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result)</td></tr>
-<tr class="memitem:aaccaf780eb4e80dee1970bd220626ea1" id="r_aaccaf780eb4e80dee1970bd220626ea1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aaccaf780eb4e80dee1970bd220626ea1">sjf_schedule</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result)</td></tr>
-<tr class="memitem:a0e6434f8ae12bf5c6c7880d227b7f5c0" id="r_a0e6434f8ae12bf5c6c7880d227b7f5c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0e6434f8ae12bf5c6c7880d227b7f5c0">sjrf_schedule</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result)</td></tr>
-<tr class="memitem:aeb65cf06d1316ed2bbd27fc35cd76d00" id="r_aeb65cf06d1316ed2bbd27fc35cd76d00"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aeb65cf06d1316ed2bbd27fc35cd76d00">rr_schedule</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result)</td></tr>
+<tr class="memitem:a089da8895e9d26369beae5ca55afc066" id="r_a089da8895e9d26369beae5ca55afc066"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a089da8895e9d26369beae5ca55afc066">fifo_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memitem:a155128ba20be40bfc6591590cbf70afb" id="r_a155128ba20be40bfc6591590cbf70afb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a155128ba20be40bfc6591590cbf70afb">sjf_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memitem:a516f8087f67a4b27ae4500c112380e69" id="r_a516f8087f67a4b27ae4500c112380e69"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a516f8087f67a4b27ae4500c112380e69">sjrf_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memitem:ae9c8f637eb0293d4911549ce10a7c9c2" id="r_ae9c8f637eb0293d4911549ce10a7c9c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae9c8f637eb0293d4911549ce10a7c9c2">rr_select</a> (<a class="el" href="struct_process.html">Process</a> **ready, int n, int quantum, int current_time)</td></tr>
+<tr class="memitem:abae1dab215146d14e2d5987580b8d4d8" id="r_abae1dab215146d14e2d5987580b8d4d8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abae1dab215146d14e2d5987580b8d4d8">simulate</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count, <a class="el" href="struct_sched_policy.html">SchedPolicy</a> *policy, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result)</td></tr>
 <tr class="memitem:a32e5d694e6ae54f7e721ad25377df580" id="r_a32e5d694e6ae54f7e721ad25377df580"><td class="memItemLeft"><a class="el" href="struct_process.html">Process</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a32e5d694e6ae54f7e721ad25377df580">read_processes_from_file</a> (const char *filename, int *count)</td></tr>
 <tr class="memitem:afe34469cb1544e2260bf852265474560" id="r_afe34469cb1544e2260bf852265474560"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afe34469cb1544e2260bf852265474560">export_to_csv</a> (const char *filename, <a class="el" href="struct_schedule_result.html">ScheduleResult</a> *result, <a class="el" href="struct_process.html">Process</a> *processes, int count)</td></tr>
 <tr class="memitem:a4580d3df1a5af54c1425341d751b0352" id="r_a4580d3df1a5af54c1425341d751b0352"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4580d3df1a5af54c1425341d751b0352">free_processes</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count)</td></tr>
+<tr class="memitem:ae7f85692203c4834e7e46b0b6eae5eea" id="r_ae7f85692203c4834e7e46b0b6eae5eea"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae7f85692203c4834e7e46b0b6eae5eea">export_timeline_csv</a> (const char *filename, char **timeline, int count, int max_time)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a47714f4531b3c5ffc14373ec077f4bb1" id="r_a47714f4531b3c5ffc14373ec077f4bb1"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a47714f4531b3c5ffc14373ec077f4bb1">FIFO_POLICY</a></td></tr>
+<tr class="memitem:acc7aef29eca7371069e006f35f507b78" id="r_acc7aef29eca7371069e006f35f507b78"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#acc7aef29eca7371069e006f35f507b78">SJF_POLICY</a></td></tr>
+<tr class="memitem:a4e50bf55e879dd927f18f808b95fcd36" id="r_a4e50bf55e879dd927f18f808b95fcd36"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4e50bf55e879dd927f18f808b95fcd36">SRJF_POLICY</a></td></tr>
+<tr class="memitem:a588668f5ff0f5ed85837a722b1176bb4" id="r_a588668f5ff0f5ed85837a722b1176bb4"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a588668f5ff0f5ed85837a722b1176bb4">RR_POLICY</a></td></tr>
 </table>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a373a58178f69d5e3e1de7516d105675e" name="a373a58178f69d5e3e1de7516d105675e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373a58178f69d5e3e1de7516d105675e">&#9670;&#160;</a></span>ProcessState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a373a58178f69d5e3e1de7516d105675e">ProcessState</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675eaec34b0b90541576a22697631105dc847" name="a373a58178f69d5e3e1de7516d105675eaec34b0b90541576a22697631105dc847"></a>NEW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea6564f2f3e15be06b670547bbcaaf0798" name="a373a58178f69d5e3e1de7516d105675ea6564f2f3e15be06b670547bbcaaf0798"></a>READY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304" name="a373a58178f69d5e3e1de7516d105675ea1061be6c3fb88d32829cba6f6b2be304"></a>RUNNING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea757971c0bc5a1972d5f1b1be2c0e2087" name="a373a58178f69d5e3e1de7516d105675ea757971c0bc5a1972d5f1b1be2c0e2087"></a>WAITING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5" name="a373a58178f69d5e3e1de7516d105675ea240c1965a48eaf409ba68c4cc9462ac5"></a>TERMINATED&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ae7f85692203c4834e7e46b0b6eae5eea" name="ae7f85692203c4834e7e46b0b6eae5eea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7f85692203c4834e7e46b0b6eae5eea">&#9670;&#160;</a></span>export_timeline_csv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void export_timeline_csv </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>timeline</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>max_time</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afe34469cb1544e2260bf852265474560" name="afe34469cb1544e2260bf852265474560"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe34469cb1544e2260bf852265474560">&#9670;&#160;</a></span>export_to_csv()</h2>
 
@@ -143,26 +218,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a76c326bd602a97334b00f7fa039125a0" name="a76c326bd602a97334b00f7fa039125a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76c326bd602a97334b00f7fa039125a0">&#9670;&#160;</a></span>fifo_schedule()</h2>
+<a id="a089da8895e9d26369beae5ca55afc066" name="a089da8895e9d26369beae5ca55afc066"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a089da8895e9d26369beae5ca55afc066">&#9670;&#160;</a></span>fifo_select()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void fifo_schedule </td>
+          <td class="memname">int fifo_select </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> *</td>          <td class="paramname"><span class="paramname"><em>processes</em></span>, </td>
+          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> **</td>          <td class="paramname"><span class="paramname"><em>ready</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_schedule_result.html">ScheduleResult</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>quantum</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>current_time</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -211,14 +291,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aeb65cf06d1316ed2bbd27fc35cd76d00" name="aeb65cf06d1316ed2bbd27fc35cd76d00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb65cf06d1316ed2bbd27fc35cd76d00">&#9670;&#160;</a></span>rr_schedule()</h2>
+<a id="ae9c8f637eb0293d4911549ce10a7c9c2" name="ae9c8f637eb0293d4911549ce10a7c9c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9c8f637eb0293d4911549ce10a7c9c2">&#9670;&#160;</a></span>rr_select()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void rr_schedule </td>
+          <td class="memname">int rr_select </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> **</td>          <td class="paramname"><span class="paramname"><em>ready</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>quantum</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>current_time</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abae1dab215146d14e2d5987580b8d4d8" name="abae1dab215146d14e2d5987580b8d4d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abae1dab215146d14e2d5987580b8d4d8">&#9670;&#160;</a></span>simulate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void simulate </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_process.html">Process</a> *</td>          <td class="paramname"><span class="paramname"><em>processes</em></span>, </td>
         </tr>
@@ -226,6 +337,11 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> *</td>          <td class="paramname"><span class="paramname"><em>policy</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -237,54 +353,153 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aaccaf780eb4e80dee1970bd220626ea1" name="aaccaf780eb4e80dee1970bd220626ea1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaccaf780eb4e80dee1970bd220626ea1">&#9670;&#160;</a></span>sjf_schedule()</h2>
+<a id="a155128ba20be40bfc6591590cbf70afb" name="a155128ba20be40bfc6591590cbf70afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a155128ba20be40bfc6591590cbf70afb">&#9670;&#160;</a></span>sjf_select()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void sjf_schedule </td>
+          <td class="memname">int sjf_select </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> *</td>          <td class="paramname"><span class="paramname"><em>processes</em></span>, </td>
+          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> **</td>          <td class="paramname"><span class="paramname"><em>ready</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_schedule_result.html">ScheduleResult</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>quantum</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>current_time</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a0e6434f8ae12bf5c6c7880d227b7f5c0" name="a0e6434f8ae12bf5c6c7880d227b7f5c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e6434f8ae12bf5c6c7880d227b7f5c0">&#9670;&#160;</a></span>sjrf_schedule()</h2>
+<a id="a516f8087f67a4b27ae4500c112380e69" name="a516f8087f67a4b27ae4500c112380e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a516f8087f67a4b27ae4500c112380e69">&#9670;&#160;</a></span>sjrf_select()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void sjrf_schedule </td>
+          <td class="memname">int sjrf_select </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> *</td>          <td class="paramname"><span class="paramname"><em>processes</em></span>, </td>
+          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> **</td>          <td class="paramname"><span class="paramname"><em>ready</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_schedule_result.html">ScheduleResult</a> *</td>          <td class="paramname"><span class="paramname"><em>result</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>quantum</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>current_time</em></span>&#160;)</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a47714f4531b3c5ffc14373ec077f4bb1" name="a47714f4531b3c5ffc14373ec077f4bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47714f4531b3c5ffc14373ec077f4bb1">&#9670;&#160;</a></span>FIFO_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> FIFO_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a588668f5ff0f5ed85837a722b1176bb4" name="a588668f5ff0f5ed85837a722b1176bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a588668f5ff0f5ed85837a722b1176bb4">&#9670;&#160;</a></span>RR_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> RR_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc7aef29eca7371069e006f35f507b78" name="acc7aef29eca7371069e006f35f507b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc7aef29eca7371069e006f35f507b78">&#9670;&#160;</a></span>SJF_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> SJF_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e50bf55e879dd927f18f808b95fcd36" name="a4e50bf55e879dd927f18f808b95fcd36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e50bf55e879dd927f18f808b95fcd36">&#9670;&#160;</a></span>SRJF_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> SRJF_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

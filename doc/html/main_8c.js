@@ -1,5 +1,28 @@
 var main_8c =
 [
-    [ "free_processes", "main_8c.html#a4580d3df1a5af54c1425341d751b0352", null ],
-    [ "main", "main_8c.html#a0ddf1224851353fc92bfbff6f499fa97", null ]
+    [ "BLUE", "main_8c.html#a79d10e672abb49ad63eeaa8aaef57c38", null ],
+    [ "BOLD", "main_8c.html#a26cdbb1a00213c810caccf21cd33a631", null ],
+    [ "CYAN", "main_8c.html#ad243f93c16bc4c1d3e0a13b84421d760", null ],
+    [ "GREEN", "main_8c.html#acfbc006ea433ad708fdee3e82996e721", null ],
+    [ "MAGENTA", "main_8c.html#a6f699060902f800f12aaae150f3a708e", null ],
+    [ "MKDIR", "main_8c.html#a17cda852a890b03845a49ff1a8ae7f6d", null ],
+    [ "RED", "main_8c.html#a8d23feea868a983c8c2b661e1e16972f", null ],
+    [ "RESET", "main_8c.html#ab702106cf3b3e96750b6845ded4e0299", null ],
+    [ "YELLOW", "main_8c.html#abf681265909adf3d3e8116c93c0ba179", null ],
+    [ "clear_screen", "main_8c.html#abc40cd622f423abf44084c8f8595f57f", null ],
+    [ "export_results_interactive", "main_8c.html#a1ed3ced4deb52059085989ab366fccbb", null ],
+    [ "flush_stdin", "main_8c.html#adf17b341779b9789342406caff250d2d", null ],
+    [ "load_processes_interactive", "main_8c.html#ac326f0d61ff77180f2ef475026b54bed", null ],
+    [ "load_processes_manual", "main_8c.html#a2e89bdc6029101b262ab0512c2afcc6e", null ],
+    [ "main", "main_8c.html#a840291bc02cba5474a4cb46a9b9566fe", null ],
+    [ "print_header", "main_8c.html#ae48d3ef26c4fe8468a0f84dba99e2dbd", null ],
+    [ "print_menu", "main_8c.html#a3d5c083535dec79d2af86dae315b6229", null ],
+    [ "run_simulation_interactive", "main_8c.html#a840d2df91a0adef27bf69dfad3109148", null ],
+    [ "select_algorithm_interactive", "main_8c.html#a839a4653c98441b26349484b03fb03ab", null ],
+    [ "visualize_with_matplotlib", "main_8c.html#a6ebf5aeeaca0a680ed16367e52a0a9da", null ],
+    [ "wait_for_enter", "main_8c.html#a3390fb57a224a8d98c40e3ce19875315", null ],
+    [ "FIFO_POLICY", "main_8c.html#a47714f4531b3c5ffc14373ec077f4bb1", null ],
+    [ "RR_POLICY", "main_8c.html#a588668f5ff0f5ed85837a722b1176bb4", null ],
+    [ "SJF_POLICY", "main_8c.html#acc7aef29eca7371069e006f35f507b78", null ],
+    [ "SRJF_POLICY", "main_8c.html#a4e50bf55e879dd927f18f808b95fcd36", null ]
 ];

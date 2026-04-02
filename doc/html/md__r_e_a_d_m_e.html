@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Scheduling_Simulator: Scheduling_Simulator</title>
+<title>Scheduling_Simulator: Simulateur d’Ordonnancement de Processus</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,216 +88,147 @@ $(function(){initNavTree('md__r_e_a_d_m_e.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Scheduling_Simulator </div></div>
+  <div class="headertitle"><div class="title">Simulateur d’Ordonnancement de Processus </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
-<p><b>Simulateur d'ordonnancement de processus en C</b> <br  />
- <em>Projet L3 Informatique - Groupe C6</em></p>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
-Équipe</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Membre  </th><th class="markdownTableHeadNone">Rôle principal  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Alissa Missaoui  </td><td class="markdownTableBodyNone">I/O, documentation &amp; rapports  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Thomas Hornung  </td><td class="markdownTableBodyNone">Algorithmes avancés  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Kamelia Takka  </td><td class="markdownTableBodyNone">Architecture &amp; modules de base  </td></tr>
-</table>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
-Diagramme de Gantt (Planification)</h1>
-<p><img src="L3_I-OS-GrC-C6-Gantt.png" alt="Diagramme de Gantt - Projet OS" class="inline"/></p>
-<blockquote class="doxtable">
-<p>Ce diagramme illustre la planification des tâches, l’occupation des ressources et les jalons clés du projet. <br  />
- Les couleurs représentent les responsabilités principales : <br  />
-</p><ul>
-<li>Violet : Équipe complète <br  />
-</li>
-<li>Bleu : P1 / Kamelia <br  />
-</li>
-<li>Vert : P2 / Thomas <br  />
-</li>
-<li>Orange : P3 / Alissa <br  />
- Les jalons importants sont indiqués par des lignes verticales colorées. </li>
-</ul>
-</blockquote>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
-Dates clés</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Date  </th><th class="markdownTableHeadNone">Événement  </th><th class="markdownTableHeadNone">Détail  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">12/02/2026  </td><td class="markdownTableBodyNone">Rendu Gantt  </td><td class="markdownTableBodyNone">Diagramme de planification  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">16/02/2026  </td><td class="markdownTableBodyNone">FIFO fonctionnel  </td><td class="markdownTableBodyNone">Premier algorithme opérationnel  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">23/02/2026  </td><td class="markdownTableBodyNone">Architecture prête  </td><td class="markdownTableBodyNone">Base modulaire finalisée  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">02/03/2026  </td><td class="markdownTableBodyNone">4 algos implémentés  </td><td class="markdownTableBodyNone">Tous algorithmes terminés  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">23/03/2026  </td><td class="markdownTableBodyNone">Tests finaux  </td><td class="markdownTableBodyNone">Validation complète  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">03/04/2026  </td><td class="markdownTableBodyNone"><b>RENDU FINAL</b>  </td><td class="markdownTableBodyNone">Archive .tgz sur Moodle  </td></tr>
-</table>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
-Objectifs du projet</h1>
-<p>Le but est d’implémenter un simulateur d’ordonnancement de processus en <b>C</b>, en mode console.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
-Entrées</h2>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Description</h1>
+<p>Ce projet implémente un simulateur d’ordonnancement de processus en langage C. Il permet d’exécuter plusieurs algorithmes d’ordonnancement (FIFO, SJF, SRJF, Round Robin) sur un jeu de processus définis par des cycles CPU et des entrées/sorties (E/S) parallélisables.</p>
+<p>Le simulateur produit :</p>
 <ul>
-<li>Processus avec durées CPU et E/S (ms)</li>
-<li>Via <b>ligne de commande</b> ou fichier texte (format à définir)</li>
+<li>Une <b>sortie console</b> détaillée (chronologie, indicateurs individuels et globaux)</li>
+<li>Un <b>export CSV</b> des résultats (indicateurs par processus et synthèse)</li>
+<li>Un <b>export CSV de la timeline</b> pour une visualisation externe</li>
+<li>Des <b>graphiques automatiques</b> (diagramme de Gantt, barres comparatives, radar, occupation CPU) via un script Python</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+Fonctionnalités</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+Algorithmes implémentés</h2>
+<ul>
+<li><b>FIFO</b> (First In, First Out) – non préemptif</li>
+<li><b>SJF</b> (Shortest Job First) – non préemptif</li>
+<li><b>SRJF</b> (Shortest Remaining Job First) – préemptif</li>
+<li><b>Round Robin</b> (quantum paramétrable) – préemptif</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+Gestion des processus</h2>
+<ul>
+<li>Chargement depuis un fichier texte</li>
+<li>Saisie manuelle interactive</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Indicateurs calculés</h2>
+<ul>
+<li>Temps d’attente (moyen et par processus)</li>
+<li>Temps de restitution (turnaround)</li>
+<li>Temps de réponse</li>
+<li>Taux d’occupation CPU</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Sorties</h2>
 <ul>
-<li><b>Textuelle (obligatoire)</b> : indicateurs exportables en CSV</li>
-<li><b>Graphique (optionnel)</b></li>
+<li>Chronologie textuelle (<span class="tt">U</span> = CPU, <span class="tt">O</span> = E/S, <span class="tt">W</span> = Attente, <span class="tt">.</span> = inactif)</li>
+<li>Tableau tabulé copiable dans un tableur</li>
+<li>Export CSV (<span class="tt">results/results_*.csv</span>) et timeline (<span class="tt">results/timeline_*.csv</span>)</li>
+<li>Génération de graphiques (Python + Matplotlib)</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
-Indicateurs obligatoires</h2>
-<ul>
-<li>Temps d’attente moyen et par processus</li>
-<li>Temps de restitution (turnaround) moyen et par processus</li>
-<li>Temps de réponse moyen et par processus</li>
-<li>Taux d’occupation du CPU</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
-Algorithmes à implémenter</h2>
-<ul>
-<li>FIFO <br  />
-</li>
-<li>SJF <br  />
-</li>
-<li>SJRF (SRTF) <br  />
-</li>
-<li>Round Robin (RR) <br  />
-</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
-Extensibilité</h2>
-<p>Architecture modulaire pour ajouter facilement d’autres algorithmes (décrite dans le rapport développeur).</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
-Livrables</h1>
-<p>Archive finale : <span class="tt">L3_I-OS-Projet-NOM1-NOM2-NOM3.tgz</span> comprenant :</p>
-<ol type="1">
-<li><b>Code source en C</b> <br  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+Installation</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+Prérequis</h2>
 <ul>
-<li>Commenté avec en-tête indiquant la participation de chaque membre <br  />
-</li>
-<li>Compatible Doxygen</li>
+<li><b>Compilateur C</b> (GCC recommandé)</li>
+<li><b>make</b> (GNU make)</li>
+<li><b>Python 3</b> et les bibliothèques suivantes : <div class="fragment"><div class="line">pip install matplotlib pandas</div>
+</div><!-- fragment --></li>
+<li><b>Doxygen</b> (optionnel, pour la documentation)</li>
 </ul>
-</li>
-<li><b>Makefile</b> <br  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+Compilation</h1>
+<p>Placez-vous dans le répertoire racine du projet et lancez : </p><div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p> L’exécutable scheduler (ou scheduler.exe sous Windows) sera créé.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+Génération de la documentation</h1>
+<div class="fragment"><div class="line">make doc</div>
+</div><!-- fragment --><p> La documentation HTML sera générée dans le dossier doc/.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+Utilisation</h1>
+<p>Lancez le programme :</p>
+<div class="fragment"><div class="line">./scheduler</div>
+</div><!-- fragment --><p>Un menu interactif vous guide :</p>
 <ul>
-<li>Génération exécutable et documentation</li>
+<li><b>Charger un fichier de processus (ou saisie manuelle)</b> <b>Choisir l’algorithme (FIFO, SJF, SRJF, RR – avec quantum modifiable)</b></li>
+<li><b>Lancer la simulation</b></li>
+<li><b>Exporter les résultats en CSV (fichiers dans results/)</b></li>
+<li><b>Visualiser avec matplotlib (génère et affiche les graphiques)</b></li>
 </ul>
-</li>
-<li><b>Rapport développeur (PDF)</b> <br  />
-<ul>
-<li>Structures de données et algorithmes <br  />
-</li>
-<li>Guide ajout de nouveaux algorithmes</li>
+<p>Vous pouvez également exécuter directement en ligne de commande :</p>
+<div class="fragment"><div class="line">./scheduler &lt;fichier&gt; [algorithme] [fichier_csv]</div>
+</div><!-- fragment --> <h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+Exemple</h2>
+<div class="fragment"><div class="line">./scheduler tests/exemple.txt fifo resultats.csv</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+Format du fichier d’entrée</h1>
+<p>Le fichier texte doit contenir une ligne par processus, au format :</p>
+<div class="fragment"><div class="line">PID arrival cpu1 io1 cpu2 io2 ... cpuN</div>
+</div><!-- fragment --><ul>
+<li><b>PID : identifiant (entier)</b></li>
+<li><b>arrival : temps d’arrivée (ms)</b></li>
+<li><b>cpuX : durée du X-ième burst CPU (ms)</b></li>
+<li><b>ioX : durée de l’E/S après le X-ième burst (sauf après le dernier burst)</b></li>
 </ul>
-</li>
-<li><b>Guide d’utilisation (Markdown)</b> <br  />
-<ul>
-<li>Installation et utilisation</li>
-</ul>
-</li>
-<li><b>Diaporama (ODP + PDF)</b> <br  />
-<ul>
-<li>Maximum 12 diapositives</li>
-</ul>
-</li>
-<li><b>Vidéo de démonstration (MKV, H.265, 1080p)</b> <br  />
-<ul>
-<li>Durée max 3 minutes <br  />
-</li>
-<li>Présentation complète des fonctionnalités</li>
-</ul>
-</li>
-</ol>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
-Bonus possibles</h2>
+Exemple</h2>
+<div class="fragment"><div class="line">1 0 3 2 2 2 2</div>
+<div class="line">2 1 2 2 3 3 2</div>
+</div><!-- fragment --><p>Les lignes commençant par # sont ignorées (commentaires).</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+Sorties</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+Console</h2>
 <ul>
-<li>Interface graphique pour résultats</li>
-<li>Génération automatique de graphiques</li>
-<li>Gestion des E/S non parallélisables</li>
+<li><b>Chronologie de l’exécution</b></li>
+<li><b>Tableau des résultats individuels (PID, arrivée, turnaround, attente, réponse) en format CSV</b></li>
+<li><b>Résumé synthétique</b></li>
 </ul>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
-Échéances importantes</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+Fichiers CSV</h2>
 <ul>
-<li>Dépôt final : archive Moodle avant le 03/04/2026 <br  />
+<li><b>results/results_&lt;algorithme&gt;.csv : indicateurs par processus + moyennes</b></li>
+<li><b>results/timeline_&lt;algorithme&gt;.csv : état de chaque processus pour chaque unité de temps (U, O, W, .)</b></li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+Graphiques (Python)</h2>
+<p>Exécutez l’option correspondante du menu pour générer automatiquement :</p>
 <ul>
-<li>Pénalité : 1 point/jour (max 5 points) <br  />
-</li>
+<li><b>gantt_&lt;algo&gt;.png : diagramme de Gantt</b></li>
+<li><b>barchart_&lt;algo&gt;.png : barres comparatives</b></li>
+<li><b>radar_&lt;algo&gt;.png : diagramme radar</b></li>
+<li><b>cpu_usage_&lt;algo&gt;.png : occupation CPU</b></li>
 </ul>
-</li>
-<li>Soutenance : 7, 8 ou 9 avril 2026 <br  />
+<div class="fragment"><div class="line">pip install matplotlib pandas</div>
+<div class="line">## Structure du projet</div>
+</div><!-- fragment --><p> bash Scheduling_Simulator/├── Makefile ├── Doxyfile ├── <a class="el" href="_r_e_a_d_m_e_8md.html">README.md</a> ├── include/ │ └── <a class="el" href="scheduler_8h.html">scheduler.h</a> ├── src/ │ ├── <a class="el" href="main_8c.html">main.c</a> │ ├── <a class="el" href="simulator_8c.html">simulator.c</a> │ ├── <a class="el" href="fifo__select_8c.html">fifo_select.c</a> │ ├── <a class="el" href="sjf__select_8c.html">sjf_select.c</a> │ ├── <a class="el" href="sjrf__select_8c.html">sjrf_select.c</a> │ ├── <a class="el" href="rr__select_8c.html">rr_select.c</a> │ ├── <a class="el" href="policies_8c.html">policies.c</a> │ ├── <a class="el" href="parser_8c.html">parser.c</a> │ └── <a class="el" href="utils_8c.html">utils.c</a> ├── results/ ├── tests/ └── plot_gantt.py ```</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+Dépendances</h1>
 <ul>
-<li>20 min (10 min présentation + 10 min questions)</li>
+<li><b>GCC (ou tout compilateur C compatible)</b></li>
+<li><b>make</b></li>
+<li><b>Python 3 avec matplotlib et pandas</b></li>
+<li><b>Doxygen</b></li>
 </ul>
-</li>
-</ul>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
-Méthode de gestion (FDD)</h1>
-<ul>
-<li><b>Modélisation initiale</b> : architecture du simulateur, structures et interfaces <br  />
-</li>
-<li><b>Liste des features</b> :<ol type="1">
-<li>Lecture fichier/commande <br  />
-</li>
-<li>Algorithme FIFO <br  />
-</li>
-<li>Algorithme SJF <br  />
-</li>
-<li>Algorithme SJRF <br  />
-</li>
-<li>Algorithme RR <br  />
-</li>
-<li>Calcul indicateurs <br  />
-</li>
-<li>Export CSV <br  />
-</li>
-<li>Sortie graphique (optionnel) <br  />
-</li>
-<li>Bonus</li>
-</ol>
-</li>
-<li><b>Planification par feature</b> : Février → Avril <br  />
-</li>
-<li><b>Développement itératif</b> : chaque feature est conçue, codée, testée et intégrée avant la suivante <br  />
-</li>
-<li><b>Livraisons régulières</b> : versions fonctionnelles partielles disponibles après chaque feature</li>
-</ul>
-<hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
-Installation rapide</h1>
-<div class="fragment"><div class="line">git clone https://github.com/votre-compte/Scheduling_Simulator.git</div>
-<div class="line">cd Scheduling_Simulator</div>
-<div class="line">make</div>
-<div class="line">./Scheduling_Simulator input.txt</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
-Structure du projet</h1>
-<div class="fragment"><div class="line">Scheduling_Simulator/</div>
-<div class="line">├── src/                    # Code source C</div>
-<div class="line">├── include/                # Headers</div>
-<div class="line">├── docs/                   # Documentation</div>
-<div class="line">├── tests/                  # Tests</div>
-<div class="line">├── examples/               # Fichiers d&#39;exemple</div>
-<div class="line">├── Makefile</div>
-<div class="line">└── README.md               # Ce fichier</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+Auteurs</h1>
+<p>Ce projet a été réalisé dans le cadre du cours d’OS (L3 Informatique).</p>
+<p>Membres du groupe : MISSAOUI Alissa TAKKA Kamelia HORNUNG Thomas</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
+Licence</h1>
+<p>Ce projet est fourni à des fins pédagogiques. Toute réutilisation est soumise à l’accord des auteurs. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

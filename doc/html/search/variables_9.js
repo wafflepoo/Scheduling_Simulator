@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['total_5fwait_5ftime_0',['total_wait_time',['../struct_process.html#a3d90fa3366417be76ca28c0f53fd5b85',1,'Process']]],
-  ['turnaround_5ftimes_1',['turnaround_times',['../struct_schedule_result.html#a57fb6caaf58599e0a23a0a3c1c7b323b',1,'ScheduleResult']]]
+  ['select_5fnext_0',['select_next',['../struct_sched_policy.html#a38d731aafab2476a79417227170498bb',1,'SchedPolicy']]],
+  ['sjf_5fpolicy_1',['SJF_POLICY',['../main_8c.html#acc7aef29eca7371069e006f35f507b78',1,'SJF_POLICY:&#160;policies.c'],['../policies_8c.html#acc7aef29eca7371069e006f35f507b78',1,'SJF_POLICY:&#160;policies.c'],['../scheduler_8h.html#acc7aef29eca7371069e006f35f507b78',1,'SJF_POLICY:&#160;policies.c']]],
+  ['srjf_5fpolicy_2',['SRJF_POLICY',['../main_8c.html#a4e50bf55e879dd927f18f808b95fcd36',1,'SRJF_POLICY:&#160;policies.c'],['../policies_8c.html#a4e50bf55e879dd927f18f808b95fcd36',1,'SRJF_POLICY:&#160;policies.c'],['../scheduler_8h.html#a4e50bf55e879dd927f18f808b95fcd36',1,'SRJF_POLICY:&#160;policies.c']]],
+  ['start_5ftime_3',['start_time',['../struct_process.html#a05adf6b209ed26609c6f787b3713c2b0',1,'Process']]],
+  ['state_4',['state',['../struct_process.html#a51874bc28aba2bd6f273df2955152472',1,'Process']]]
 ];

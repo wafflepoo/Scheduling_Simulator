@@ -95,36 +95,261 @@ $(function(){initNavTree('main_8c.html','',''); });
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="scheduler_8h_source.html">scheduler.h</a>&quot;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a17cda852a890b03845a49ff1a8ae7f6d" id="r_a17cda852a890b03845a49ff1a8ae7f6d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a17cda852a890b03845a49ff1a8ae7f6d">MKDIR</a>(p)</td></tr>
+<tr class="memitem:ab702106cf3b3e96750b6845ded4e0299" id="r_ab702106cf3b3e96750b6845ded4e0299"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab702106cf3b3e96750b6845ded4e0299">RESET</a>&#160;&#160;&#160;&quot;\033[0m&quot;</td></tr>
+<tr class="memitem:a8d23feea868a983c8c2b661e1e16972f" id="r_a8d23feea868a983c8c2b661e1e16972f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8d23feea868a983c8c2b661e1e16972f">RED</a>&#160;&#160;&#160;&quot;\033[31m&quot;</td></tr>
+<tr class="memitem:acfbc006ea433ad708fdee3e82996e721" id="r_acfbc006ea433ad708fdee3e82996e721"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#acfbc006ea433ad708fdee3e82996e721">GREEN</a>&#160;&#160;&#160;&quot;\033[32m&quot;</td></tr>
+<tr class="memitem:abf681265909adf3d3e8116c93c0ba179" id="r_abf681265909adf3d3e8116c93c0ba179"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abf681265909adf3d3e8116c93c0ba179">YELLOW</a>&#160;&#160;&#160;&quot;\033[33m&quot;</td></tr>
+<tr class="memitem:a79d10e672abb49ad63eeaa8aaef57c38" id="r_a79d10e672abb49ad63eeaa8aaef57c38"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a79d10e672abb49ad63eeaa8aaef57c38">BLUE</a>&#160;&#160;&#160;&quot;\033[34m&quot;</td></tr>
+<tr class="memitem:a6f699060902f800f12aaae150f3a708e" id="r_a6f699060902f800f12aaae150f3a708e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6f699060902f800f12aaae150f3a708e">MAGENTA</a>&#160;&#160;&#160;&quot;\033[35m&quot;</td></tr>
+<tr class="memitem:ad243f93c16bc4c1d3e0a13b84421d760" id="r_ad243f93c16bc4c1d3e0a13b84421d760"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad243f93c16bc4c1d3e0a13b84421d760">CYAN</a>&#160;&#160;&#160;&quot;\033[36m&quot;</td></tr>
+<tr class="memitem:a26cdbb1a00213c810caccf21cd33a631" id="r_a26cdbb1a00213c810caccf21cd33a631"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a26cdbb1a00213c810caccf21cd33a631">BOLD</a>&#160;&#160;&#160;&quot;\033[1m&quot;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
-<tr class="memitem:a4580d3df1a5af54c1425341d751b0352" id="r_a4580d3df1a5af54c1425341d751b0352"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4580d3df1a5af54c1425341d751b0352">free_processes</a> (<a class="el" href="struct_process.html">Process</a> *processes, int count)</td></tr>
+<tr class="memitem:abc40cd622f423abf44084c8f8595f57f" id="r_abc40cd622f423abf44084c8f8595f57f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abc40cd622f423abf44084c8f8595f57f">clear_screen</a> (void)</td></tr>
+<tr class="memitem:ae48d3ef26c4fe8468a0f84dba99e2dbd" id="r_ae48d3ef26c4fe8468a0f84dba99e2dbd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae48d3ef26c4fe8468a0f84dba99e2dbd">print_header</a> (const char *title)</td></tr>
+<tr class="memitem:a3d5c083535dec79d2af86dae315b6229" id="r_a3d5c083535dec79d2af86dae315b6229"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3d5c083535dec79d2af86dae315b6229">print_menu</a> (void)</td></tr>
+<tr class="memitem:ac326f0d61ff77180f2ef475026b54bed" id="r_ac326f0d61ff77180f2ef475026b54bed"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac326f0d61ff77180f2ef475026b54bed">load_processes_interactive</a> (void)</td></tr>
+<tr class="memitem:a2e89bdc6029101b262ab0512c2afcc6e" id="r_a2e89bdc6029101b262ab0512c2afcc6e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2e89bdc6029101b262ab0512c2afcc6e">load_processes_manual</a> (void)</td></tr>
+<tr class="memitem:a839a4653c98441b26349484b03fb03ab" id="r_a839a4653c98441b26349484b03fb03ab"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a839a4653c98441b26349484b03fb03ab">select_algorithm_interactive</a> (void)</td></tr>
+<tr class="memitem:a840d2df91a0adef27bf69dfad3109148" id="r_a840d2df91a0adef27bf69dfad3109148"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a840d2df91a0adef27bf69dfad3109148">run_simulation_interactive</a> (void)</td></tr>
+<tr class="memitem:a1ed3ced4deb52059085989ab366fccbb" id="r_a1ed3ced4deb52059085989ab366fccbb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1ed3ced4deb52059085989ab366fccbb">export_results_interactive</a> (void)</td></tr>
+<tr class="memitem:a6ebf5aeeaca0a680ed16367e52a0a9da" id="r_a6ebf5aeeaca0a680ed16367e52a0a9da"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6ebf5aeeaca0a680ed16367e52a0a9da">visualize_with_matplotlib</a> (void)</td></tr>
+<tr class="memitem:a3390fb57a224a8d98c40e3ce19875315" id="r_a3390fb57a224a8d98c40e3ce19875315"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3390fb57a224a8d98c40e3ce19875315">wait_for_enter</a> (void)</td></tr>
+<tr class="memitem:adf17b341779b9789342406caff250d2d" id="r_adf17b341779b9789342406caff250d2d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adf17b341779b9789342406caff250d2d">flush_stdin</a> (void)</td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe" id="r_a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a47714f4531b3c5ffc14373ec077f4bb1" id="r_a47714f4531b3c5ffc14373ec077f4bb1"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a47714f4531b3c5ffc14373ec077f4bb1">FIFO_POLICY</a></td></tr>
+<tr class="memitem:acc7aef29eca7371069e006f35f507b78" id="r_acc7aef29eca7371069e006f35f507b78"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#acc7aef29eca7371069e006f35f507b78">SJF_POLICY</a></td></tr>
+<tr class="memitem:a4e50bf55e879dd927f18f808b95fcd36" id="r_a4e50bf55e879dd927f18f808b95fcd36"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4e50bf55e879dd927f18f808b95fcd36">SRJF_POLICY</a></td></tr>
+<tr class="memitem:a588668f5ff0f5ed85837a722b1176bb4" id="r_a588668f5ff0f5ed85837a722b1176bb4"><td class="memItemLeft"><a class="el" href="struct_sched_policy.html">SchedPolicy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a588668f5ff0f5ed85837a722b1176bb4">RR_POLICY</a></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a4580d3df1a5af54c1425341d751b0352" name="a4580d3df1a5af54c1425341d751b0352"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4580d3df1a5af54c1425341d751b0352">&#9670;&#160;</a></span>free_processes()</h2>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a79d10e672abb49ad63eeaa8aaef57c38" name="a79d10e672abb49ad63eeaa8aaef57c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d10e672abb49ad63eeaa8aaef57c38">&#9670;&#160;</a></span>BLUE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void free_processes </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_process.html">Process</a> *</td>          <td class="paramname"><span class="paramname"><em>processes</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>count</em></span>&#160;)</td>
+          <td class="memname">#define BLUE&#160;&#160;&#160;&quot;\033[34m&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
+<a id="a26cdbb1a00213c810caccf21cd33a631" name="a26cdbb1a00213c810caccf21cd33a631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26cdbb1a00213c810caccf21cd33a631">&#9670;&#160;</a></span>BOLD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BOLD&#160;&#160;&#160;&quot;\033[1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad243f93c16bc4c1d3e0a13b84421d760" name="ad243f93c16bc4c1d3e0a13b84421d760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad243f93c16bc4c1d3e0a13b84421d760">&#9670;&#160;</a></span>CYAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYAN&#160;&#160;&#160;&quot;\033[36m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfbc006ea433ad708fdee3e82996e721" name="acfbc006ea433ad708fdee3e82996e721"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfbc006ea433ad708fdee3e82996e721">&#9670;&#160;</a></span>GREEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GREEN&#160;&#160;&#160;&quot;\033[32m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f699060902f800f12aaae150f3a708e" name="a6f699060902f800f12aaae150f3a708e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f699060902f800f12aaae150f3a708e">&#9670;&#160;</a></span>MAGENTA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAGENTA&#160;&#160;&#160;&quot;\033[35m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a17cda852a890b03845a49ff1a8ae7f6d" name="a17cda852a890b03845a49ff1a8ae7f6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17cda852a890b03845a49ff1a8ae7f6d">&#9670;&#160;</a></span>MKDIR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MKDIR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">mkdir(p, 0755)</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8d23feea868a983c8c2b661e1e16972f" name="a8d23feea868a983c8c2b661e1e16972f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d23feea868a983c8c2b661e1e16972f">&#9670;&#160;</a></span>RED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RED&#160;&#160;&#160;&quot;\033[31m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab702106cf3b3e96750b6845ded4e0299" name="ab702106cf3b3e96750b6845ded4e0299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab702106cf3b3e96750b6845ded4e0299">&#9670;&#160;</a></span>RESET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESET&#160;&#160;&#160;&quot;\033[0m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf681265909adf3d3e8116c93c0ba179" name="abf681265909adf3d3e8116c93c0ba179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf681265909adf3d3e8116c93c0ba179">&#9670;&#160;</a></span>YELLOW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define YELLOW&#160;&#160;&#160;&quot;\033[33m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="abc40cd622f423abf44084c8f8595f57f" name="abc40cd622f423abf44084c8f8595f57f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc40cd622f423abf44084c8f8595f57f">&#9670;&#160;</a></span>clear_screen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clear_screen </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ed3ced4deb52059085989ab366fccbb" name="a1ed3ced4deb52059085989ab366fccbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ed3ced4deb52059085989ab366fccbb">&#9670;&#160;</a></span>export_results_interactive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void export_results_interactive </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf17b341779b9789342406caff250d2d" name="adf17b341779b9789342406caff250d2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf17b341779b9789342406caff250d2d">&#9670;&#160;</a></span>flush_stdin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void flush_stdin </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac326f0d61ff77180f2ef475026b54bed" name="ac326f0d61ff77180f2ef475026b54bed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac326f0d61ff77180f2ef475026b54bed">&#9670;&#160;</a></span>load_processes_interactive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_processes_interactive </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e89bdc6029101b262ab0512c2afcc6e" name="a2e89bdc6029101b262ab0512c2afcc6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e89bdc6029101b262ab0512c2afcc6e">&#9670;&#160;</a></span>load_processes_manual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void load_processes_manual </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a840291bc02cba5474a4cb46a9b9566fe" name="a840291bc02cba5474a4cb46a9b9566fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840291bc02cba5474a4cb46a9b9566fe">&#9670;&#160;</a></span>main()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,14 +357,201 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int main </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae48d3ef26c4fe8468a0f84dba99e2dbd" name="ae48d3ef26c4fe8468a0f84dba99e2dbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae48d3ef26c4fe8468a0f84dba99e2dbd">&#9670;&#160;</a></span>print_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_header </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>title</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d5c083535dec79d2af86dae315b6229" name="a3d5c083535dec79d2af86dae315b6229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d5c083535dec79d2af86dae315b6229">&#9670;&#160;</a></span>print_menu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_menu </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a840d2df91a0adef27bf69dfad3109148" name="a840d2df91a0adef27bf69dfad3109148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840d2df91a0adef27bf69dfad3109148">&#9670;&#160;</a></span>run_simulation_interactive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void run_simulation_interactive </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a839a4653c98441b26349484b03fb03ab" name="a839a4653c98441b26349484b03fb03ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a839a4653c98441b26349484b03fb03ab">&#9670;&#160;</a></span>select_algorithm_interactive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void select_algorithm_interactive </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ebf5aeeaca0a680ed16367e52a0a9da" name="a6ebf5aeeaca0a680ed16367e52a0a9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ebf5aeeaca0a680ed16367e52a0a9da">&#9670;&#160;</a></span>visualize_with_matplotlib()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void visualize_with_matplotlib </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3390fb57a224a8d98c40e3ce19875315" name="a3390fb57a224a8d98c40e3ce19875315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3390fb57a224a8d98c40e3ce19875315">&#9670;&#160;</a></span>wait_for_enter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void wait_for_enter </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a47714f4531b3c5ffc14373ec077f4bb1" name="a47714f4531b3c5ffc14373ec077f4bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47714f4531b3c5ffc14373ec077f4bb1">&#9670;&#160;</a></span>FIFO_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> FIFO_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a588668f5ff0f5ed85837a722b1176bb4" name="a588668f5ff0f5ed85837a722b1176bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a588668f5ff0f5ed85837a722b1176bb4">&#9670;&#160;</a></span>RR_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> RR_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc7aef29eca7371069e006f35f507b78" name="acc7aef29eca7371069e006f35f507b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc7aef29eca7371069e006f35f507b78">&#9670;&#160;</a></span>SJF_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> SJF_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e50bf55e879dd927f18f808b95fcd36" name="a4e50bf55e879dd927f18f808b95fcd36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e50bf55e879dd927f18f808b95fcd36">&#9670;&#160;</a></span>SRJF_POLICY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_sched_policy.html">SchedPolicy</a> SRJF_POLICY</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

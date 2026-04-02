@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['fifo_5fschedule_0',['fifo_schedule',['../fifo_8c.html#a76c326bd602a97334b00f7fa039125a0',1,'fifo_schedule(Process *processes, int count, ScheduleResult *result):&#160;fifo.c'],['../scheduler_8h.html#a76c326bd602a97334b00f7fa039125a0',1,'fifo_schedule(Process *processes, int count, ScheduleResult *result):&#160;fifo.c']]],
-  ['free_5fprocesses_1',['free_processes',['../main_8c.html#a4580d3df1a5af54c1425341d751b0352',1,'free_processes(Process *processes, int count):&#160;main.c'],['../scheduler_8h.html#a4580d3df1a5af54c1425341d751b0352',1,'free_processes(Process *processes, int count):&#160;main.c']]]
+  ['export_5fresults_5finteractive_0',['export_results_interactive',['../main_8c.html#a1ed3ced4deb52059085989ab366fccbb',1,'main.c']]],
+  ['export_5ftimeline_5fcsv_1',['export_timeline_csv',['../simulator_8c.html#ae7f85692203c4834e7e46b0b6eae5eea',1,'export_timeline_csv(const char *filename, char **timeline, int count, int max_time):&#160;simulator.c'],['../scheduler_8h.html#ae7f85692203c4834e7e46b0b6eae5eea',1,'export_timeline_csv(const char *filename, char **timeline, int count, int max_time):&#160;simulator.c']]],
+  ['export_5fto_5fcsv_2',['export_to_csv',['../utils_8c.html#afe34469cb1544e2260bf852265474560',1,'export_to_csv(const char *filename, ScheduleResult *result, Process *processes, int count):&#160;utils.c'],['../scheduler_8h.html#afe34469cb1544e2260bf852265474560',1,'export_to_csv(const char *filename, ScheduleResult *result, Process *processes, int count):&#160;utils.c']]]
 ];

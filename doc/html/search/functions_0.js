@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['export_5fto_5fcsv_0',['export_to_csv',['../scheduler_8h.html#afe34469cb1544e2260bf852265474560',1,'scheduler.h']]]
+  ['clear_5fscreen_0',['clear_screen',['../main_8c.html#abc40cd622f423abf44084c8f8595f57f',1,'main.c']]]
 ];

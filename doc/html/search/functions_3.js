@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['read_5fprocesses_5ffrom_5ffile_0',['read_processes_from_file',['../parser_8c.html#a32e5d694e6ae54f7e721ad25377df580',1,'read_processes_from_file(const char *filename, int *count):&#160;parser.c'],['../scheduler_8h.html#a32e5d694e6ae54f7e721ad25377df580',1,'read_processes_from_file(const char *filename, int *count):&#160;parser.c']]],
-  ['rr_5fschedule_1',['rr_schedule',['../scheduler_8h.html#aeb65cf06d1316ed2bbd27fc35cd76d00',1,'scheduler.h']]]
+  ['load_5fprocesses_5finteractive_0',['load_processes_interactive',['../main_8c.html#ac326f0d61ff77180f2ef475026b54bed',1,'main.c']]],
+  ['load_5fprocesses_5fmanual_1',['load_processes_manual',['../main_8c.html#a2e89bdc6029101b262ab0512c2afcc6e',1,'main.c']]]
 ];

@@ -25,24 +25,33 @@
 var NAVTREE =
 [
   [ "Scheduling_Simulator", "index.html", [
-    [ "Scheduling_Simulator", "md__r_e_a_d_m_e.html", [
-      [ "Équipe", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "Diagramme de Gantt (Planification)", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
-      [ "Dates clés", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "Objectifs du projet", "md__r_e_a_d_m_e.html#autotoc_md8", [
-        [ "Entrées", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-        [ "Sorties", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-        [ "Indicateurs obligatoires", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-        [ "Algorithmes à implémenter", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-        [ "Extensibilité", "md__r_e_a_d_m_e.html#autotoc_md13", null ]
+    [ "Simulateur d’Ordonnancement de Processus", "md__r_e_a_d_m_e.html", [
+      [ "Description", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
+      [ "Fonctionnalités", "md__r_e_a_d_m_e.html#autotoc_md3", [
+        [ "Algorithmes implémentés", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
+        [ "Gestion des processus", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
+        [ "Indicateurs calculés", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
+        [ "Sorties", "md__r_e_a_d_m_e.html#autotoc_md7", null ]
       ] ],
-      [ "Livrables", "md__r_e_a_d_m_e.html#autotoc_md15", [
-        [ "Bonus possibles", "md__r_e_a_d_m_e.html#autotoc_md16", null ]
+      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md9", [
+        [ "Prérequis", "md__r_e_a_d_m_e.html#autotoc_md10", null ]
       ] ],
-      [ "Échéances importantes", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
-      [ "Méthode de gestion (FDD)", "md__r_e_a_d_m_e.html#autotoc_md20", null ],
-      [ "Installation rapide", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
-      [ "Structure du projet", "md__r_e_a_d_m_e.html#autotoc_md23", null ]
+      [ "Compilation", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "Génération de la documentation", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Utilisation", "md__r_e_a_d_m_e.html#autotoc_md13", [
+        [ "Exemple", "md__r_e_a_d_m_e.html#autotoc_md14", null ]
+      ] ],
+      [ "Format du fichier d’entrée", "md__r_e_a_d_m_e.html#autotoc_md15", [
+        [ "Exemple", "md__r_e_a_d_m_e.html#autotoc_md16", null ]
+      ] ],
+      [ "Sorties", "md__r_e_a_d_m_e.html#autotoc_md17", [
+        [ "Console", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
+        [ "Fichiers CSV", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
+        [ "Graphiques (Python)", "md__r_e_a_d_m_e.html#autotoc_md20", null ]
+      ] ],
+      [ "Dépendances", "md__r_e_a_d_m_e.html#autotoc_md21", null ],
+      [ "Auteurs", "md__r_e_a_d_m_e.html#autotoc_md22", null ],
+      [ "Licence", "md__r_e_a_d_m_e.html#autotoc_md23", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -56,7 +65,12 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ]
+        [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]

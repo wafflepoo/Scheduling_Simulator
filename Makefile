@@ -21,8 +21,6 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 doc:
-	@which doxygen > /dev/null 2>&1 || \
-		{ echo "Erreur : doxygen n'est pas installé."; exit 1; }
 	doxygen Doxyfile
 	@echo "Documentation générée dans doc/html/index.html"
 

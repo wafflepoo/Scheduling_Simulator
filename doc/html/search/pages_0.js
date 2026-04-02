@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['algorithmes_20à_20implémenter_0',['Algorithmes à implémenter',['../md__r_e_a_d_m_e.html#autotoc_md12',1,'']]]
+  ['algorithmes_20implémentés_0',['Algorithmes implémentés',['../md__r_e_a_d_m_e.html#autotoc_md4',1,'']]],
+  ['auteurs_1',['Auteurs',['../md__r_e_a_d_m_e.html#autotoc_md22',1,'']]]
 ];
