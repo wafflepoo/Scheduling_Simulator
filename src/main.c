@@ -57,6 +57,7 @@ void export_results_interactive(void);
 void visualize_with_matplotlib(void);
 void wait_for_enter(void);
 void flush_stdin(void);
+void run_simulation_from_args(const char *filename, const char *algo, const char *csv_output);
 
 /* ========================================================================
  * Point d'entrée principal
@@ -70,7 +71,16 @@ void flush_stdin(void);
  * 
  * @return int Code de retour (0 = succès).
  */
-int main(void) {
+int main(int argc, char *argv[]) {
+
+    // Si des arguments sont passés, mode ligne de commande
+    if (argc >= 3) {
+        const char *csv_output = (argc >= 4) ? argv[3] : NULL;
+        run_simulation_from_args(argv[1], argv[2], csv_output);
+        return 0;
+    }
+
+    // Sinon, mode interactif 
     clear_screen();
     print_header("SIMULATEUR D'ORDONNANCEMENT DE PROCESSUS");
 
@@ -505,4 +515,45 @@ void visualize_with_matplotlib(void) {
 void wait_for_enter(void) {
     printf("\n" BOLD "Appuyez sur Entrée pour continuer..." RESET);
     flush_stdin();
+}
+
+
+
+void run_simulation_from_args(const char *filename, const char *algo, const char *csv_output) {
+    // Charger les processus
+    Process *procs = read_processes_from_file(filename, &process_count);
+    if (!procs) {
+        fprintf(stderr, "Erreur : impossible de charger %s\n", filename);
+        exit(1);
+    }
+    loaded_processes = procs;  // stockage global (utile pour simulate)
+
+    // Déterminer la politique
+    SchedPolicy *policy = NULL;
+    if (strcmp(algo, "fifo") == 0 || strcmp(algo, "FIFO") == 0)
+        policy = &FIFO_POLICY;
+    else if (strcmp(algo, "sjf") == 0 || strcmp(algo, "SJF") == 0)
+        policy = &SJF_POLICY;
+    else if (strcmp(algo, "sjrf") == 0 || strcmp(algo, "SRJF") == 0)
+        policy = &SRJF_POLICY;
+    else if (strcmp(algo, "rr") == 0 || strcmp(algo, "RR") == 0)
+        policy = &RR_POLICY;
+    else {
+        fprintf(stderr, "Algorithme inconnu : %s (choix : fifo, sjf, sjrf, rr)\n", algo);
+        exit(1);
+    }
+
+    // Lancer la simulation
+    ScheduleResult result;
+    simulate(loaded_processes, process_count, policy, &result);
+
+    // Si un nom de fichier CSV est fourni, écrire les résultats dedans
+    if (csv_output) {
+        export_to_csv(csv_output, &result, loaded_processes, process_count);
+    }
+
+    // Libération
+    free_processes(loaded_processes, process_count);
+    loaded_processes = NULL;
+    process_count = 0;
 }
