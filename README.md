@@ -67,10 +67,17 @@ make
 L’exécutable scheduler (ou scheduler.exe sous Windows) sera créé.
 
 ## Génération de la documentation
+Si vous avez un Makefile qui contient une cible doc (par exemple, définie comme doc: doxygen Doxyfile), alors vous pouvez simplement taper :
 
 ```bash
 make doc
 ```
+Sinon, la commande standard pour générer la documentation avec Doxygen est :
+```bash
+doxygen Doxyfile
+```
+(Si le fichier de configuration s’appelle exactement Doxyfile, vous pouvez même taper seulement doxygen car il le cherche par défaut.)
+
 La documentation HTML sera générée dans le dossier doc/.
 
 ## Utilisation
