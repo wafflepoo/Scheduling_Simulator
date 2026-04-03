@@ -41,6 +41,14 @@ Le simulateur produit :
 
 ##  Installation
 
+
+### 1. Récupérer le projet
+```bash
+git clone https://github.com/wafflepoo/Scheduling_Simulator
+cd Scheduling_Simulator
+```
+
+
 ### Prérequis
 - **Compilateur C** (GCC recommandé)
 - **make** (GNU make)
