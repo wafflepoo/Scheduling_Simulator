@@ -1,7 +1,7 @@
 /**
  * @file parser.c
  * @brief Lecture et parsing des fichiers d'entrée contenant les processus
- * @authors MISSAOUI Alissa (50%), TAKKA Kamelia (25%), HORNUNG Thomas (25%)
+ * @authors MISSAOUI Alissa (40%), TAKKA Kamelia (30%), HORNUNG Thomas (30%)
  * @date 2026-04-02
  * 
  * Ce module lit un fichier texte décrivant un ensemble de processus,
