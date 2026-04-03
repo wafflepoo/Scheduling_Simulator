@@ -1,13 +1,10 @@
 # Guide d'installation et d'utilisation
 
 Simulateur d'ordonnancement de processus — L3 Informatique
-
 CY Cergy Paris Université — Groupe C6 — 2025/2026  
-
 Auteurs : MISSAOUI Alissa, TAKKA Kamelia, HORNUNG Thomas  
 
 ---
-
 ## Prérequis
 
 Avant de commencer, vérifiez que vous disposez de :
