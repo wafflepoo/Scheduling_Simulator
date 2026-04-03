@@ -4,7 +4,7 @@
 """
 @file plot_gantt.py
 @brief Génération de graphiques à partir des résultats de simulation
-@authors MISSAOUI Alissa (100%), TAKKA Kamelia (0%), HORNUNG Thomas (0%)
+@authors MISSAOUI Alissa (80%), TAKKA Kamelia (20%), HORNUNG Thomas (0%)
 @date 2026-04-02
 @version 1.0
 
