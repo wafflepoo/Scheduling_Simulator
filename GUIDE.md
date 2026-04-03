@@ -79,7 +79,7 @@ PID  arrivee  cpu1  io1  cpu2  io2  cpu3  ...
 
 ## Utilisation
 
-### Mode ligne de commande (rapide)
+### Syntaxe
 ```bash
 ./simulateur <fichier> <algorithme> [fichier_csv]
 ```
@@ -90,12 +90,12 @@ PID  arrivee  cpu1  io1  cpu2  io2  cpu3  ...
 | `<algorithme>` | Oui | `fifo`, `sjf`, `sjrf` ou `rr` |
 | `[fichier_csv]` | Non | Nom du fichier CSV à générer |
 
-### Mode interactif (recommandé)
+### Lancer le programme
 ```bash
 ./simulateur
 ```
 
-Un menu interactif s'affiche avec 7 options :
+Un menu s'affiche avec 7 options :
 ```
 MENU PRINCIPAL
 1. Charger un fichier de processus
@@ -105,6 +105,7 @@ MENU PRINCIPAL
 5. Exporter les résultats en CSV
 6. Visualiser avec matplotlib (Python)
 7. Quitter
+```
 ```
 ## Méthode 1 — Charger un fichier
 
