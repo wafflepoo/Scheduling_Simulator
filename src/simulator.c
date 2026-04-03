@@ -13,11 +13,22 @@
  *   - La generation de la timeline et des metriques
  */
 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 #include "scheduler.h"
+
+
+#include <sys/stat.h>
+#ifdef _WIN32
+#include <direct.h>
+#define MKDIR(p) _mkdir(p)
+#else
+#define MKDIR(p) mkdir(p, 0755)
+#endif
 
 /* ========================================================================
  * Structure interne pour la gestion des evenements d'E/S
@@ -130,6 +141,9 @@ void export_timeline_csv(const char *filename, char **timeline, int count, int m
  * @param result    Structure qui recevra les metriques de performance.
  */
 void simulate(Process *processes, int count, SchedPolicy *policy, ScheduleResult *result) {
+    // Créer le dossier results/ s'il n'existe pas
+    MKDIR("results");
+
     if (count == 0) return;
 
     /* Copie locale pour ne pas modifier l'original */
