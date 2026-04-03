@@ -1,7 +1,7 @@
 /**
  * @file rr_select.c
  * @brief Implémentation de la politique Round Robin (tourniquet)
- * @authors MISSAOUI Alissa (50%), TAKKA Kamelia (50%), HORNUNG Thomas (0%)
+ * @authors MISSAOUI Alissa (20%), TAKKA Kamelia (80%), HORNUNG Thomas (0%)
  * @date 2026-04-02
  * 
  * Cette politique utilise une file FIFO. Le quantum est géré dans le simulateur
