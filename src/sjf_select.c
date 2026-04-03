@@ -1,7 +1,7 @@
 /**
  * @file sjf_select.c
  * @brief Implémentation de la politique SJF (Shortest Job First) non préemptive
- * @authors MISSAOUI Alissa (100%), TAKKA Kamelia (0%), HORNUNG Thomas (100%)
+ * @authors MISSAOUI Alissa (0%), TAKKA Kamelia (0%), HORNUNG Thomas (100%)
  * @date 2026-04-02
  * 
  * Cette politique sélectionne le processus ayant le prochain burst CPU
