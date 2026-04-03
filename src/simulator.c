@@ -1,7 +1,7 @@
 /**
  * @file simulator.c
  * @brief Cœur du simulateur d'ordonnancement : boucle evenementielle et gestion des files
- * @authors MISSAOUI Alissa (50%), TAKKA Kamelia (25%), HORNUNG Thomas (25%)
+ * @authors MISSAOUI Alissa (40%), TAKKA Kamelia (30%), HORNUNG Thomas (30%)
  * @date 2026-04-02
  * 
  * Ce module implemente la fonction simulate() qui execute la simulation
