@@ -1,7 +1,7 @@
 /**
  * @file sjrf_select.c
  * @brief Implémentation de la politique SRJF (Shortest Remaining Job First) préemptive
- * @authors MISSAOUI Alissa (50%), TAKKA Kamelia (0%), HORNUNG Thomas 50%)
+ * @authors MISSAOUI Alissa (0%), TAKKA Kamelia (0%), HORNUNG Thomas 100%)
  * @date 2026-04-02
  * 
  * Cette politique sélectionne le processus ayant le temps restant (remaining_burst)
