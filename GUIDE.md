@@ -222,6 +222,11 @@ make clean
 Supprime l'exécutable et les fichiers objets compilés.
 
 ---
+## Ajouter un nouvel algorithme
 
+1. Créer `src/nom_select.c` avec la fonction de sélection
+2. Déclarer la politique dans `src/policies.c`
+3. Ajouter le cas dans `src/main.c`
+4. Relancer `make`
 
 Pour plus de détails, consulter le rapport développeur (PDF).
