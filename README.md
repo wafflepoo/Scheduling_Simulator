@@ -74,7 +74,7 @@ make doc
 ```
 Sinon, la commande standard pour générer la documentation avec Doxygen est :
 ```bash
-doxygen Doxyfile
+doxygen <nom_doxyfile>
 ```
 (Si le fichier de configuration s’appelle exactement Doxyfile, vous pouvez même taper seulement doxygen car il le cherche par défaut.)
 
