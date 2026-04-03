@@ -26,7 +26,7 @@ make --version
 
 ### 1. Récupérer le projet
 ```bash
-git clone https://github.com/votre-repo/Scheduling_Simulator.git
+git clone https://github.com/wafflepoo/Scheduling_Simulator
 cd Scheduling_Simulator
 ```
 
