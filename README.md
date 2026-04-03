@@ -189,7 +189,7 @@ Scheduling_Simulator/
 ## Auteurs
 Ce projet a été réalisé dans le cadre du cours d’OS (L3 Informatique).
 
-Membres du groupe :
+Membres du groupe C6:
 MISSAOUI Alissa
 TAKKA Kamelia
 HORNUNG Thomas
